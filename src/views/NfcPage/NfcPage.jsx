@@ -9,8 +9,7 @@ import damirBosnjak from "../../assets/img/damir-bosnjak.jpg";
 import mike from "../../assets/img/mike.jpg";
 import NotificationAlert from "react-notification-alert";
 
-import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
-import 'react-html5-camera-photo/build/css/index.css';
+import Nfc from 'nfc-react-web';
 
 class User extends React.Component {
   constructor(props) {
@@ -20,21 +19,6 @@ class User extends React.Component {
     };
     this.onDismiss = this.onDismiss.bind(this);
     this.notify = this.notify.bind(this);
-  }
-  onTakePhoto (dataUri) {
-    console.log('takePhoto', dataUri);
-  }
- 
-  onCameraError (error) {
-    console.error('onCameraError', error);
-  }
- 
-  onCameraStart (stream) {
-    console.log('onCameraStart');
-  }
- 
-  onCameraStop () {
-    console.log('onCameraStop');
   }
 
   onDismiss() {}
@@ -77,7 +61,6 @@ class User extends React.Component {
     };
     this.refs.notificationAlert.notificationAlert(options);
   }
-
   render() {
     return (
       <div className="content">
@@ -107,21 +90,11 @@ class User extends React.Component {
                 >
                   Bottom Center
                 </Button>
-                <Camera
-                  onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
-                  onCameraError = { (error) => { this.onCameraError(error); } }
-                  idealFacingMode = {FACING_MODES.ENVIRONMENT}
-                  idealResolution = {{width: 640, height: 480}}
-                  imageType = {IMAGE_TYPES.JPG}
-                  imageCompression = {0.97}
-                  isMaxResolution = {false}
-                  isImageMirror = {false}
-                  isSilentMode = {true}
-                  isDisplayStartCameraError = {true}
-                  isFullscreen = {false}
-                  sizeFactor = {1}
-                  onCameraStart = { (stream) => { this.onCameraStart(stream); } }
-                  onCameraStop = { () => { this.onCameraStop(); } }
+                <Nfc
+                  read={data => {
+                    console.log(`Data read from tag: ${JSON.stringify(data)}`);
+                  }}
+                  timeout={1} // time to keep trying to read tags, in seconds
                 />
               </CardBody>
               <CardFooter>
