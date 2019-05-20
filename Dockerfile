@@ -9,6 +9,8 @@ RUN npm cache clean --force\
     && npm run build
 
 FROM nginx:1.12-alpine
+RUN rm -rf /etc/nginx/conf.d
+COPY conf /etc/nginx
 COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html
 RUN apk update && apk add --no-cache ca-certificates
 EXPOSE 80
