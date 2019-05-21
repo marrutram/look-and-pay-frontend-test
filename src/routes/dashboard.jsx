@@ -13,7 +13,6 @@ var dashRoutes = [
     name: "NFC RFID",
     icon: "nc-icon nc-zoom-split",
     component: NfcPage
-  },
-  { redirect: true, path: "/", pathTo: "/user-page", name: "User Profile" }
+  }
 ];
 export default dashRoutes;
