@@ -11,7 +11,7 @@ import NotificationAlert from "react-notification-alert";
 
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
-import {  Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
 
 class User extends React.Component {

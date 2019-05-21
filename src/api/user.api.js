@@ -11,7 +11,7 @@ export function signup(arg) {
             email: "${arg.email}", 
             password: "${arg.password}",
             name: "${arg.name}",
-            lastnanme: "${arg.lastnanme}",
+            lastname: "${arg.lastName}",
             urlImagen: "${arg.urlImagen}"
           )
         }

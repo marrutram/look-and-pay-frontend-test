@@ -1,4 +1,5 @@
 import { login } from '../api/user.api';
+import { LOGIN_SUCCESS, LOGIN_STARTED, LOGIN_FAILURE } from '../constante/typeAction';
 import { get } from 'lodash';
 
 export const loginAction = (data) => {
@@ -20,18 +21,18 @@ export const loginAction = (data) => {
 };
 
 const loginSuccess = todo => ({
-  type: "LOGIN_SUCCESS",
+  type: LOGIN_SUCCESS,
   payload: {
     ...todo
   }
 });
 
 const loginStarted = () => ({
-  type: "LOGIN_STARTED"
+  type: LOGIN_STARTED
 });
 
 const loginFailure = error => ({
-  type: "LOGIN_FAILURE",
+  type: LOGIN_FAILURE,
   payload: {
     error
   }

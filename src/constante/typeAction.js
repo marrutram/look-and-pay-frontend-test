@@ -1,0 +1,6 @@
+export const LOGIN_SUCCESS = "login success"
+export const LOGIN_STARTED = "login started"
+export const LOGIN_FAILURE = "login failure"
+export const REGISTRY_SUCCESS = "registry success"
+export const REGISTRY_STARTED = "registry started"
+export const REGISTRY_FAILURE = "registry failure"

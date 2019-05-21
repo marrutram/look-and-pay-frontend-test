@@ -14,7 +14,8 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: true
+      visible: true,
+      isRegistry: false
     };
     this.onDismiss = this.onDismiss.bind(this);
     this.notify = this.notify.bind(this);
@@ -66,11 +67,22 @@ class Login extends React.Component {
     this.props.onLogin(this.state);
   }
   
+  async onRegistry() {
+    await this.setState({isRegistry: true});
+    console.log("entro!!!!", this.state);
+  }
+
   render() {
     const { loginState } = this.props;
     if (loginState.isAuthenticated) {
       return <Redirect from="/" to="/user-page"/>;
     }
+
+    const { isRegistry } = this.state;
+    if (isRegistry) {
+      return <Redirect from="/" to="/registry"/>;
+    }
+
     return (
       <div className="content">
         <NotificationAlert ref="notificationAlert" />
@@ -128,11 +140,21 @@ class Login extends React.Component {
                     <Row>
                       <Col xs={12} sm={12} md={12} lg={12} className="ml-auto">
                         <Button
-                          color="primary"
+                          color="success"
                           block
                           type="submit"
                         >
                           Login
+                        </Button>
+                      </Col>
+                      <hr />
+                      <Col xs={12} pr={1} pl={1} sm={12} md={12} lg={12} className="ml-auto">
+                        <Button
+                          color="info"
+                          block
+                          onClick={() => this.onRegistry()}
+                        >
+                          Registry
                         </Button>
                       </Col>
                     </Row>

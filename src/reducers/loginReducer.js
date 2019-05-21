@@ -1,3 +1,4 @@
+import { LOGIN_SUCCESS, LOGIN_STARTED, LOGIN_FAILURE } from '../constante/typeAction';
 const initialState = {
   loading: false,
   login: null,
@@ -7,12 +8,12 @@ const initialState = {
 
 export default function loginReducer(state = initialState, action) {
   switch (action.type) {
-    case "LOGIN_STARTED":
+    case LOGIN_STARTED:
       return {
         ...state,
         loading: true
       };
-    case "LOGIN_SUCCESS":
+    case LOGIN_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -20,7 +21,7 @@ export default function loginReducer(state = initialState, action) {
         error: null,
         login: action.payload?action.payload:state.login
       };
-    case "LOGIN_FAILURE":
+    case LOGIN_FAILURE:
       return {
         ...state,
         loading: false,
