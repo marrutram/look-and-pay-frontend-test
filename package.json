@@ -9,6 +9,7 @@
     "bootstrap": "4.1.3",
     "chart.js": "2.7.2",
     "history": "4.7.2",
+    "lodash": "^4.17.11",
     "nfc-react-web": "0.0.2",
     "node-sass": "^4.9.3",
     "perfect-scrollbar": "1.4.0",

@@ -8,11 +8,11 @@ export function signup(arg) {
       query: `
         mutation {
           signup(
-            email: ${arg.email}, 
-            password: ${arg.password},
-            name: ${arg.name},
-            lastnanme:  ${arg.lastnanme},
-            urlImagen ${arg.urlImagen}
+            email: "${arg.email}", 
+            password: "${arg.password}",
+            name: "${arg.name}",
+            lastnanme: "${arg.lastnanme}",
+            urlImagen: "${arg.urlImagen}"
           )
         }
       `
@@ -28,8 +28,8 @@ export function login(arg) {
       query: `
         mutation {
           login(
-            email: ${arg.email}, 
-            password: ${arg.password}
+            email: "${arg.email}", 
+            password: "${arg.password}"
           )
         }
       `

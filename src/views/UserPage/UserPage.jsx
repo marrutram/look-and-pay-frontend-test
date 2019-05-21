@@ -11,6 +11,8 @@ import NotificationAlert from "react-notification-alert";
 
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
+import {  Redirect } from "react-router-dom";
+import { connect } from 'react-redux';
 
 class User extends React.Component {
   constructor(props) {
@@ -79,6 +81,12 @@ class User extends React.Component {
   }
 
   render() {
+    const { loginState } = this.props;
+
+    if (!loginState.isAuthenticated) {
+      return <Redirect from="/" to="/login"/>;
+    }
+
     return (
       <div className="content">
         <NotificationAlert ref="notificationAlert" />
@@ -358,4 +366,8 @@ class User extends React.Component {
   }
 }
 
-export default User;
+const mapStateToProps = (state) => ({
+  ...state
+});
+
+export default connect(mapStateToProps)(User);

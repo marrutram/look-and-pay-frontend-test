@@ -1,6 +1,7 @@
 const initialState = {
   loading: false,
   login: [],
+  isAuthenticated: false,
   error: null
 };
 
@@ -15,6 +16,7 @@ export default function loginReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        isAuthenticated: true,
         error: null,
         login: [...state.login, action.payload]
       };
@@ -22,6 +24,7 @@ export default function loginReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        isAuthenticated: false,
         error: action.payload.error
       };
     default:

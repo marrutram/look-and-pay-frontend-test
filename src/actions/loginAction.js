@@ -1,4 +1,5 @@
 import { login } from '../api/user.api';
+import { get } from 'lodash';
 
 export const loginAction = (data) => {
   return dispatch => {
@@ -6,10 +7,13 @@ export const loginAction = (data) => {
 
     login(data)
       .then(res => {
-        dispatch(loginSuccess(res.data));
+        if(get(res, 'data.errors')) {
+          dispatch(loginFailure(get(res, 'data.errors[0].message')));
+        } else {
+          dispatch(loginSuccess(res.data));
+        }
       })
       .catch(err => {
-        console.log("err::", err);
         dispatch(loginFailure(err.message));
       });
   };
