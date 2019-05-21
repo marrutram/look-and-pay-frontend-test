@@ -10,7 +10,7 @@ export const loginAction = (data) => {
         if(get(res, 'data.errors')) {
           dispatch(loginFailure(get(res, 'data.errors[0].message')));
         } else {
-          dispatch(loginSuccess(res.data));
+          dispatch(loginSuccess(get (res, 'data.data.login')));
         }
       })
       .catch(err => {

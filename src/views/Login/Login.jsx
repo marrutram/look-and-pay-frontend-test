@@ -8,7 +8,7 @@ import Button from "../../components/CustomButton/CustomButton.jsx";
 import imagenHeaderLogin from "../../assets/img/lider.jpg";
 import mike from "../../assets/img/mike.jpg";
 import NotificationAlert from "react-notification-alert";
-import {  Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class Login extends React.Component {
   constructor(props) {

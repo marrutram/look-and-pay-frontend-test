@@ -10,10 +10,13 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./assets/scss/paper-dashboard.scss";
 import "./assets/demo/demo.css";
 import indexRoutes from "./routes/index.jsx";
+import * as token from "./middleware/token"
 
+const store = configureStore();
+token.setToken(store);
 const hist = createBrowserHistory();
 ReactDOM.render(
-  <Provider store={configureStore()}>
+  <Provider store={store}>
     <Router history={hist}>
       <Switch>
         {indexRoutes.map((prop, key) => {
