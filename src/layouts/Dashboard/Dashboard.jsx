@@ -6,6 +6,7 @@ import Footer from "../../components/Footer/Footer.jsx";
 import Sidebar from "../../components/Sidebar/Sidebar.jsx";
 import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.jsx";
 import dashboardRoutes from "../../routes/dashboard.jsx";
+import Header from "../../components/Header/Header.jsx";
 import { connect } from 'react-redux';
 var ps;
 class Dashboard extends React.Component {
@@ -55,6 +56,7 @@ class Dashboard extends React.Component {
           routes={dashboardRoutes}
         />
         <div className="main-panel" ref="mainPanel">
+        <Header {...this.props} />
           <Switch>
             {dashboardRoutes.map((prop, key) => {
               if (prop.pro) {

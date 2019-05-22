@@ -26,8 +26,11 @@ class Header extends React.Component {
     this.state = {
       isOpen: false,
       dropdownOpen: false,
-      color: "transparent"
+      color: "transparent",
+      login: this.props.loginState.login
     };
+
+    console.log("state::", this.state );
     this.toggle = this.toggle.bind(this);
     this.dropdownToggle = this.dropdownToggle.bind(this);
   }
@@ -147,16 +150,10 @@ class Header extends React.Component {
             navbar
             className="justify-content-end"
           >
-            <Nav navbar>
-              <NavItem>
-                <Link to="#pablo" className="nav-link btn-rotate">
-                  <i className="nc-icon nc-settings-gear-65" />
-                  <p>
-                    <span className="d-lg-none d-md-block">Account</span>
-                  </p>
-                </Link>
-              </NavItem>
-            </Nav>
+           <div className="badge-colors text-right">
+            <i className="nc-icon nc-single-02" />
+            {this.state.login.name} {this.state.login.lastname} 
+           </div>
           </Collapse>
         </Container>
       </Navbar>
