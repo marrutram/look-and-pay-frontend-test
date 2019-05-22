@@ -43,6 +43,7 @@ class Dashboard extends React.Component {
       document.scrollingElement.scrollTop = 0;
     }
   }
+
   render() {
     const { auth } = this.state;
     if (!auth) {

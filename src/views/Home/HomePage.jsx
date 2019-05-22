@@ -3,11 +3,9 @@ import { Card, CardBody, CardFooter, Row, Col } from "reactstrap";
 
 import CardAuthor from "../../components/CardElements/CardAuthor.jsx";
 import Button from "../../components/CustomButton/CustomButton.jsx";
-
 import damirBosnjak from "../../assets/img/damir-bosnjak.jpg";
 import mike from "../../assets/img/mike.jpg";
 import NotificationAlert from "react-notification-alert";
-import { connect } from 'react-redux';
 
 
 class Home extends React.Component {
@@ -60,7 +58,6 @@ class Home extends React.Component {
     };
     this.refs.notificationAlert.notificationAlert(options);
   }
-  
   render() {
     return (
       <div className="content">
@@ -129,8 +126,4 @@ we want you not to have to worry about using cash or credit cards, but when payi
   }
 }
 
-const mapStateToProps = (state) => ({
-  ...state
-});
-
-export default connect(mapStateToProps)(Home);
+export default Home;

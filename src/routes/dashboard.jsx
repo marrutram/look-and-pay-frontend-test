@@ -5,6 +5,7 @@ var dashRoutes = [
   {
     path: "/home",
     name: "Home",
+    icon: "nc-icon nc-cart-simple",
     component: HomePage
   },
   {
