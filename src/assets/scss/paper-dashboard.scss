@@ -89,12 +89,17 @@
   padding: 5px 5px 5px 35% !important;
 }
 
-.card-pay .image, .header-login {
+.card-pay .image, .header-login, .logo-home-header {
   background:rgb(0, 113, 206) ;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 25px 5px 5px 35% !important;
 }
+
+.logo-home-header {
+  padding: 25px 5px 5px 42% !important;
+}
+
 .form-control {
   background-color: transparent !important;
 }
@@ -105,4 +110,8 @@
 
 .header-login .image, .header-login-img{
   max-width: 40% !important;
+}
+
+.logo-home {
+  height: 100%;
 }
