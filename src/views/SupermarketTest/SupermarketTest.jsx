@@ -6,7 +6,6 @@ import supermarketPhoto from "../../assets/img/super.jpeg";
 import NotificationAlert from "react-notification-alert";
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
-import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
 import { thead, tbody, supermarketArray, productArray} from "../../variables/general";
 import * as moment from 'moment-timezone';
@@ -62,8 +61,8 @@ class SupermarketTest extends React.Component {
   }
 
   componentDidMount() {
-    //this.messageWelcome();
-    //this.randomData();
+    this.messageWelcome();
+    this.randomData();
   }
   
   async randomData() {
@@ -95,12 +94,6 @@ class SupermarketTest extends React.Component {
   }
 
   render() {
-    const { loginState } = this.props;
-
-    if (!loginState.isAuthenticated) {
-      return <Redirect from="/" to="/login"/>;
-    }
-
     return (
       <div className="content">
         <NotificationAlert ref="notificationAlert" />

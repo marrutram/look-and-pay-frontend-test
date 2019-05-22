@@ -52,7 +52,7 @@ class Login extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    //await this.setState({email: event.target.elements.email.value, password: event.target.elements.password.value});
+    await this.setState({email: event.target.elements.email.value, password: event.target.elements.password.value});
     this.props.onLogin(this.state);
   }
   

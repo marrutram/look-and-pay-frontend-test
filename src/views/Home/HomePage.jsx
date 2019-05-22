@@ -1,14 +1,10 @@
 import React from "react";
 import { Card, CardHeader, CardBody, CardTitle, CardFooter, Row, Col } from "reactstrap";
-
 import CardAuthor from "../../components/CardElements/CardAuthor.jsx";
 import Button from "../../components/CustomButton/CustomButton.jsx";
-
 import damirBosnjak from "../../assets/img/damir-bosnjak.jpg";
 import mike from "../../assets/img/mike.jpg";
 import NotificationAlert from "react-notification-alert";
-import { Redirect } from "react-router-dom";
-import { connect } from 'react-redux';
 
 
 class Home extends React.Component {
@@ -62,12 +58,6 @@ class Home extends React.Component {
     this.refs.notificationAlert.notificationAlert(options);
   }
   render() {
-
-    const { loginState } = this.props;
-    if (loginState.isAuthenticated) {
-      return <Redirect from="/" to="/login"/>;
-    }
-  
     return (
       <div className="content">
         <NotificationAlert ref="notificationAlert" />
@@ -135,8 +125,4 @@ we want you not to have to worry about using cash or credit cards, but when payi
   }
 }
 
-const mapStateToProps = (state) => ({
-  ...state
-});
-
-export default connect(mapStateToProps)(Home);
+export default Home;
