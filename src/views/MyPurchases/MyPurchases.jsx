@@ -59,7 +59,7 @@ class MyPuchases extends React.Component {
       <div className="content">
         <NotificationAlert ref="notificationAlert" />
         <Row>
-          <Col md={8} xs={12}>
+          <Col md={12} xs={12}>
             <Card className="card-user">
               <CardBody>
                 <form>
