@@ -78,3 +78,25 @@
   padding-top: 12px;
   font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
 }
+
+.logo-look-pay {
+  max-width: 60% !important;
+}
+
+.sidebar .logo, .off-canvas-sidebar .logo {
+  padding: 5px 5px 5px 35% !important;
+}
+
+.card-pay .image {
+  background:rgb(0, 113, 206) ;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 25px 5px 5px 30% !important;
+}
+.form-control {
+  background-color: transparent !important;
+}
+
+.logo-look-pay-spark {
+  max-width: 40% !important;
+}

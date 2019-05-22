@@ -242,9 +242,9 @@
         z-index: 3;
     }
 
-    &[data-color="white"]{
-      @include sidebar-color($white-color);
-      @include sidebar-text-color($default-color);
+    &[data-color="blue"]{
+      @include sidebar-color($blue-color);
+      @include sidebar-text-color($white-color);
     }
     &[data-color="black"]{
       @include sidebar-color($dark-color);

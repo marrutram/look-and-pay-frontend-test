@@ -46,9 +46,9 @@ class FixedPlugin extends Component {
                       ? "badge filter badge-light active"
                       : "badge filter badge-light"
                   }
-                  data-color="white"
+                  data-color="blue"
                   onClick={() => {
-                    this.props.setBgAction("white");
+                    this.props.setBgAction("blue");
                   }}
                 />
               </div>

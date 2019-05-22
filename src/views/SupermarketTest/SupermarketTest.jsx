@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Table, CardBody, CardFooter, Row, Col } from "reactstrap";
 import FormInputs from "../../components/FormInputs/FormInputs.jsx";
 import Button from "../../components/CustomButton/CustomButton.jsx";
-import supermarketPhoto from "../../assets/img/super.jpeg";
+import supermarketPhoto from "../../assets/img/logo.svg";
 import NotificationAlert from "react-notification-alert";
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
@@ -188,9 +188,9 @@ class SupermarketTest extends React.Component {
             </Card>
           </Col>
           <Col md={4} xs={12}>
-            <Card className="card-user">
+            <Card className="card-user card-pay">
               <div className="image">
-                <img src={supermarketPhoto} alt="..." />
+                <img className="logo-look-pay " src={supermarketPhoto} alt="..." />
               </div>
               <CardBody>
                 

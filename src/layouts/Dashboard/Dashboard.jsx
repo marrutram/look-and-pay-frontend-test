@@ -2,7 +2,6 @@ import React from "react";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 import { Route, Switch, Redirect } from "react-router-dom";
-import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import Sidebar from "../../components/Sidebar/Sidebar.jsx";
 import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.jsx";
@@ -47,7 +46,6 @@ class Dashboard extends React.Component {
           routes={dashboardRoutes}
         />
         <div className="main-panel" ref="mainPanel">
-          <Header {...this.props} />
           <Switch>
             {dashboardRoutes.map((prop, key) => {
               if (prop.pro) {

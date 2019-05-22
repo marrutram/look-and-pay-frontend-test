@@ -2,7 +2,7 @@ export const loadState = () => {
   try {
     const serializedData = localStorage.getItem('state')
     if (serializedData === null){
-      return { bgState: {bgColor: "black"}, activeState: {activeColor: "info"} } 
+      return { bgState: {bgColor: "blue"}, activeState: {activeColor: "warning"} } 
     }
     return JSON.parse(serializedData); 
   } catch (error) {

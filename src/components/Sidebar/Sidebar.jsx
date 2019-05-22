@@ -6,7 +6,7 @@ import PerfectScrollbar from "perfect-scrollbar";
 
 import { connect } from "react-redux";
 
-import logo from "../../logo.svg";
+import logo from "../../assets/img/walmart_spark.png";
 
 var ps;
 
@@ -36,20 +36,7 @@ class Sidebar extends React.Component {
     return (
       <div className="sidebar" data-color={this.props.bgState.bgColor} data-active-color={this.props.activeState.activeColor}>
         <div className="logo">
-          <a
-            href="https://www.lider.cl/"
-            className="simple-text logo-mini"
-          >
-            <div className="logo-img">
-              <img src={logo} alt="react-logo" />
-            </div>
-          </a>
-          <a
-            href="https://www.lider.cl/"
-            className="simple-text logo-normal"
-          >
-            LOOK&PAY
-          </a>
+          <img className="logo-look-pay-spark " src={logo} alt="..." />
         </div>
         <div className="sidebar-wrapper" ref="sidebar">
           <Nav>
