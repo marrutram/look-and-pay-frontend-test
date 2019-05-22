@@ -9,7 +9,8 @@ import 'react-html5-camera-photo/build/css/index.css';
 import { connect } from 'react-redux';
 import { thead, tbody, supermarketArray, productArray} from "../../variables/general";
 import * as moment from 'moment-timezone';
-import { random, map, get } from 'lodash';
+import numeral from 'numeral'
+import { random, map, sumBy } from 'lodash';
 
 class MyPuchases extends React.Component {
   constructor(props) {
@@ -27,34 +28,36 @@ class MyPuchases extends React.Component {
   }
   
   async randomData() {
-    const supermarketIndex = random(1, supermarketArray.length - 1);
-    const supermarket = supermarketArray[supermarketIndex];
-    const electronicBill = random(999, 10000) + 99999999;
-    const date =  moment().tz("America/Santiago").format("MM-DD-YYYY"); 
-    const hour =  moment().tz("America/Santiago").format("HH:mm");
-    const products = []; 
-    let index = random(0, 4);
-    for (let i = 0; i < 3; i++) {
-      const product = productArray[index];
-      product.count = random(1, 100);
-      product.total = product.count * product.unit;
-      products.push(product);
-      index++;
-      tbody.push({
-        className: "table-success",
-        data: map(product)
-      });
+    const purchasesCount = random(10, false);
+    let purchases = [];
+    for(let i=0; i<=purchasesCount; i++) {
+      const supermarketIndex = random(1, supermarketArray.length - 1);
+      const supermarket = supermarketArray[supermarketIndex];
+      const electronicBill = random(999, 10000) + 99999999;
+      const date =  moment().tz("America/Santiago").format("MM-DD-YYYY"); 
+      const hour =  moment().tz("America/Santiago").format("HH:mm");
+      const products = []; 
+      let index = random(0, 4);
+      for (let i = 0; i < 3; i++) {
+        const product = productArray[index];
+        product.count = random(1, 10);
+        product.total = product.count * product.unit;
+        products.push(product);
+        index++;
+        tbody.push({
+          className: "table-success",
+          data: map(product)
+        });
+      }
+      purchases.push({supermarket, electronicBill, date, hour, products});
     }
     await this.setState({
-      supermarket: supermarket,
-      electronicBill: electronicBill,
-      date: date,
-      hour: hour,
-      products: products
+      purchases
     });
   }
 
   render() {
+    const {purchases} = this.state;
     return (
       <div className="content">
         <NotificationAlert ref="notificationAlert" />
@@ -63,7 +66,35 @@ class MyPuchases extends React.Component {
             <Card className="card-user">
               <CardBody>
                 <form>
-                  <FormInputs
+                {
+                    purchases && purchases.length > 0 && 
+                    <Table responsive>
+                      <thead className="text-primary">
+                        <tr>
+                          <th>Date</th>
+                          <th>Hour</th>
+                          <th>Market</th>
+                          <th>Bill</th>
+                          <th>Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {purchases.map((val, key) => {
+                          const total = sumBy(val.products, 'total');
+                          return (
+                            <tr key={key}>
+                              <td>{val.date}</td>
+                              <td>{val.hour}</td>
+                              <td className="text-capitalize">{val.supermarket}</td>
+                              <td>{val.electronicBill}</td>
+                              <td>{`${numeral(total).format('0,0')} $`}</td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </Table>
+                  }
+                  {/* <FormInputs
                     ncols={["col-md-6 col-xs-12", "col-md-6 col-xs-12"]}
                     proprieties={[
                       {
@@ -105,8 +136,8 @@ class MyPuchases extends React.Component {
                         }
                       }
                     ]}
-                  />
-                  <Table responsive>
+                  /> */}
+                  {/* <Table responsive>
                     <thead className="text-primary">
                       <tr>
                         {thead.map((prop, key) => {
@@ -143,7 +174,7 @@ class MyPuchases extends React.Component {
                         );
                       })}
                     </tbody>
-                  </Table>
+                  </Table> */}
                 </form>
               </CardBody>
             </Card>
