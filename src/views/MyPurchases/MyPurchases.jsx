@@ -1,30 +1,37 @@
 import React from "react";
-import { Card, Table, CardBody, CardFooter, Row, Col } from "reactstrap";
-import FormInputs from "../../components/FormInputs/FormInputs.jsx";
-import Button from "../../components/CustomButton/CustomButton.jsx";
-import supermarketPhoto from "../../assets/img/logo.svg";
+import { Card, Table, CardBody, Row, Col, CardFooter, Button } from "reactstrap";
 import NotificationAlert from "react-notification-alert";
-import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
-import 'react-html5-camera-photo/build/css/index.css';
 import { connect } from 'react-redux';
 import { thead, tbody, supermarketArray, productArray} from "../../variables/general";
+import ProductsList from "../../components/ProductsList";
 import * as moment from 'moment-timezone';
 import numeral from 'numeral'
-import { random, map, sumBy } from 'lodash';
+import { random, map, sumBy, toString } from 'lodash';
 
-class MyPuchases extends React.Component {
+class MyPurchases extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: true
+      visible: true,
+      view: 'purchaseList',
+      purchase: null
     };
-    this.onDismiss = this.onDismiss.bind(this);
+    this.onSelectPurchase = this.onSelectPurchase.bind(this);
+    this.onGoBack = this.onGoBack.bind(this);
   }
   
   onDismiss() {}
 
   componentDidMount() {
     this.randomData();
+  }
+
+  onSelectPurchase = (purchase) => {
+    this.setState({view: 'purchaseDetails', purchase});
+  }
+
+  onGoBack = () => {
+    this.setState({view: 'purchaseList', purchase: null});
   }
   
   async randomData() {
@@ -33,7 +40,7 @@ class MyPuchases extends React.Component {
     for(let i=0; i<=purchasesCount; i++) {
       const supermarketIndex = random(1, supermarketArray.length - 1);
       const supermarket = supermarketArray[supermarketIndex];
-      const electronicBill = random(999, 10000) + 99999999;
+      const electronicBill = toString(random(999, 10000) + 99999999);
       const date =  moment().tz("America/Santiago").format("MM-DD-YYYY"); 
       const hour =  moment().tz("America/Santiago").format("HH:mm");
       const products = []; 
@@ -57,7 +64,7 @@ class MyPuchases extends React.Component {
   }
 
   render() {
-    const {purchases} = this.state;
+    const { purchases, view, purchase } = this.state;
     return (
       <div className="content">
         <NotificationAlert ref="notificationAlert" />
@@ -65,118 +72,48 @@ class MyPuchases extends React.Component {
           <Col md={12} xs={12}>
             <Card className="card-user">
               <CardBody>
-                <form>
                 {
-                    purchases && purchases.length > 0 && 
-                    <Table responsive>
-                      <thead className="text-primary">
-                        <tr>
-                          <th>Date</th>
-                          <th>Hour</th>
-                          <th>Market</th>
-                          <th>Bill</th>
-                          <th>Total</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {purchases.map((val, key) => {
-                          const total = sumBy(val.products, 'total');
-                          return (
-                            <tr key={key}>
-                              <td>{val.date}</td>
-                              <td>{val.hour}</td>
-                              <td className="text-capitalize">{val.supermarket}</td>
-                              <td>{val.electronicBill}</td>
-                              <td>{`${numeral(total).format('0,0')} $`}</td>
-                            </tr>
-                          )
-                        })}
-                      </tbody>
-                    </Table>
-                  }
-                  {/* <FormInputs
-                    ncols={["col-md-6 col-xs-12", "col-md-6 col-xs-12"]}
-                    proprieties={[
-                      {
-                        label: "Supermarket",
-                        inputProps: {
-                          type: "text",
-                          disabled: true,
-                          defaultValue: this.state.supermarket
-                        }
-                      },
-                      {
-                        label: "Electronic bill",
-                        inputProps: {
-                          type: "text",
-                          disabled: true,
-                          defaultValue: this.state.electronicBill
-                        }
-                      }
-                    ]}
-                  />
-                  
-                   <FormInputs
-                    ncols={["col-md-6 col-xs-12", "col-md-6 col-xs-12"]}
-                    proprieties={[
-                      {
-                        label: "Date",
-                        inputProps: {
-                          type: "text",
-                          disabled: true,
-                          defaultValue: this.state.date
-                        }
-                      },
-                      {
-                        label: "Hour",
-                        inputProps: {
-                          type: "text",
-                          disabled: true,
-                          defaultValue: this.state.hour
-                        }
-                      }
-                    ]}
-                  /> */}
-                  {/* <Table responsive>
-                    <thead className="text-primary">
-                      <tr>
-                        {thead.map((prop, key) => {
-                          if (key === thead.length - 1)
-                            return (
-                              <th key={key} className="text-right">
-                                {prop}
-                              </th>
-                            );
-                          return <th key={key}>{prop}</th>;
-                        })}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {tbody.map((prop, key) => {
-                        return (
-                          <tr key={key}>
-                            {prop.data.map((prop, key) => {
-                              if (key === 0)
-                                return (
-                                  <td key={key}>
-                                    <img src={prop} alt="" className="img-circle img-no-padding img-responsive img-product" />
-                                  </td>
-                                );
-                              if (key === thead.length - 1)
-                                return (
-                                  <td key={key} className="text-right">
-                                    {prop}
-                                  </td>
-                                );
-                              return <td key={key}>{prop}</td>;
-                            })}
+                  view === 'purchaseList' ?
+                  <form>
+                  {
+                      purchases && purchases.length > 0 && 
+                      <Table responsive>
+                        <thead className="text-primary">
+                          <tr>
+                            <th>Date</th>
+                            <th>Hour</th>
+                            <th>Market</th>
+                            <th>Bill</th>
+                            <th>Total</th>
                           </tr>
-                        );
-                      })}
-                    </tbody>
-                  </Table> */}
-                </form>
+                        </thead>
+                        <tbody>
+                          {purchases.map((val, key) => {
+                            const total = sumBy(val.products, 'total');
+                            return (
+                              <tr key={key} style={{cursor: 'pointer'}} onClick={() => this.onSelectPurchase(val)}>
+                                <td>{val.date}</td>
+                                <td>{val.hour}</td>
+                                <td className="text-capitalize">{val.supermarket}</td>
+                                <td>{val.electronicBill}</td>
+                                <td>{`${numeral(total).format('0,0')} $`}</td>
+                              </tr>
+                            )
+                          })}
+                        </tbody>
+                      </Table>
+                    }
+                  </form>
+                  :
+                  <ProductsList {...purchase} />
+                }
               </CardBody>
+              {
+                view === 'purchaseDetails' &&
+                <CardFooter className="text-center">
+                  <Button onClick={this.onGoBack}>Go back!</Button>
+                </CardFooter>
+              }
             </Card>
           </Col>
         </Row>
@@ -189,4 +126,4 @@ const mapStateToProps = (state) => ({
   ...state
 });
 
-export default connect(mapStateToProps)(MyPuchases);
+export default connect(mapStateToProps)(MyPurchases);
