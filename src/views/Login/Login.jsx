@@ -74,7 +74,7 @@ class Login extends React.Component {
     return (
       <div className="content">
         <NotificationAlert ref="notificationAlert" />
-        <div className="row margen-row-login">
+        <div className="row margen-row-login mt-4">
           <Col md={4}></Col>
           <Col md={4} xs={12}>
             <Card className="card-user">

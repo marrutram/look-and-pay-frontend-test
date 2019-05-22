@@ -100,7 +100,7 @@ class Registry extends React.Component {
       return (
         <div className="content">
         <NotificationAlert ref="notificationAlert" />
-          <Row>
+          <Row className="mt-4">
             <Col md={2}></Col>
             <Col md={8} xs={12}>
               <Card className="card-user logo-look-register-card"> 
@@ -110,7 +110,7 @@ class Registry extends React.Component {
                     </div>
                     </CardHeader>
                 <CardBody>
-                <h5> Registry </h5>
+                  <h5 className="text-center"> Register your picture! </h5>
                   <Camera
                     onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
                     onCameraError = { (error) => { this.onCameraError(error); } }
@@ -141,7 +141,7 @@ class Registry extends React.Component {
       return (
         <div className="content">
           <NotificationAlert ref="notificationAlert" />
-          <div className="row margen-row-login">
+          <div className="row margen-row-login mt-4">
              <Col md={2}></Col>
               <Col md={8} pl={1} xs={12}>
                 <Card className="card-user">
