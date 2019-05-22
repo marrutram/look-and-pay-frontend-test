@@ -11,6 +11,8 @@
     "history": "4.7.2",
     "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.25",
     "nfc-react-web": "0.0.2",
     "node-sass": "^4.9.3",
     "perfect-scrollbar": "1.4.0",

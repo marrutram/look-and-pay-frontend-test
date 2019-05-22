@@ -1,21 +1,50 @@
 
 const thead = ["Product", "description", "Unit", "Count", "Total"];
-const tbody = [
+const tbody = [];
 
-  {
-    className: "table-success",
-    data: ["https://images.lider.cl/wmtcl?set=imageSize[medium],imageURL[file:/productos/742351a.jpg],options[progressive]&call=url[file:catalog/sizing.chain]&sink=format[jpg],options[progressive]", "hamburger meat", "550", "3", "1650"]
-  },
-  {
-    className: "",
-    data: ["https://images.lider.cl/wmtcl?set=imageSize[medium],imageURL[file:/productos/868304a.jpg],options[progressive]&call=url[file:catalog/sizing.chain]&sink=format[jpg],options[progressive]", "Detergent", "10895", "31", "10895"]
-  
-  },
-  {
-    className: "table-info",
-    data: ["https://images.lider.cl/wmtcl?set=imageSize[medium],imageURL[file:/productos/3257a.jpg],options[progressive]&call=url[file:catalog/sizing.chain]&sink=format[jpg],options[progressive]", "Leche Semidescremada en Polvo", "3999", "1", "3999"]
-  
-  }
+const supermarketArray = ["Express de Lider Vitacura", "lider san bernardo", "lider Escuela Militar", "Express de Lider Apoquindo", "Express de Lider Colón"];
+const productArray = [{
+  imagenUrl: "https://images.lider.cl/wmtcl?set=imageSize[medium],imageURL[file:/productos/742351a.jpg],options[progressive]&call=url[file:catalog/sizing.chain]&sink=format[jpg],options[progressive]",
+  description: "hamburger meat",
+  unit: "1650",
+  count: 0
+},
+{
+  imagenUrl: "https://images.lider.cl/wmtcl?set=imageSize[medium],imageURL[file:/productos/769824a.jpg],options[progressive]&call=url[file:catalog/sizing.chain]&sink=format[jpg],options[progressive]",
+  description: "Detergent",
+  unit: "10895",
+  count: 0
+},
+{
+  imagenUrl: "https://images.lider.cl/wmtcl?set=imageSize[medium],imageURL[file:/productos/962167a.jpg],options[progressive]&call=url[file:catalog/sizing.chain]&sink=format[jpg],options[progressive]",
+  description: "Adult Dog Food Medium Breeds",
+  unit: "3999",
+  count: 0
+},
+{
+  imagenUrl: "https://images.lider.cl/wmtcl?set=imageSize[medium],imageURL[file:/productos/300149a.jpg],options[progressive]&call=url[file:catalog/sizing.chain]&sink=format[jpg],options[progressive]",
+  description: "Nestlé, Milo Bag",
+  unit: "4680",
+  count: 0
+},
+{
+  imagenUrl: "https://images.lider.cl/wmtcl?set=imageSize[medium],imageURL[file:/productos/296197a.jpg],options[progressive]&call=url[file:catalog/sizing.chain]&sink=format[jpg],options[progressive]",
+  description: "Tuna Lomitos in Agua Angelmo",
+  unit: "890",
+  count: 0
+},
+{
+  imagenUrl: "https://images.lider.cl/wmtcl?set=imageSize[medium],imageURL[file:/productos/311155a.jpg],options[progressive]&call=url[file:catalog/sizing.chain]&sink=format[jpg],options[progressive]",
+  description: "Papel Higiénico Rindemax 30 m Paquete",
+  unit: "5590",
+  count: 0
+},
+{
+  imagenUrl: "https://images.lider.cl/wmtcl?set=imageSize[medium],imageURL[file:/productos/278814a.jpg],options[progressive]&call=url[file:catalog/sizing.chain]&sink=format[jpg],options[progressive]",
+  description: "Laminated Cheese Gauda 30 Sheets Bag",
+  unit: "3290",
+  count: 0
+}
 ];
 
-export { thead, tbody };
+export { thead, tbody, supermarketArray, productArray };

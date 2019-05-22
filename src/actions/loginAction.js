@@ -11,7 +11,6 @@ export const loginAction = (data) => {
         if(get(res, 'data.errors')) {
           dispatch(loginFailure(get(res, 'data.errors[0].message')));
         } else {
-          console.log("loginAction:", get (res, 'data.data.login'));
           dispatch(loginSuccess(get (res, 'data.data.login')));
         }
       })

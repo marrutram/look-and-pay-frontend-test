@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, CardHeader, CardBody, CardTitle, CardFooter, Row, Col } from "reactstrap";
-import CardAuthor from "../../components/CardElements/CardAuthor.jsx";
 import FormInputs from "../../components/FormInputs/FormInputs.jsx";
 import Button from "../../components/CustomButton/CustomButton.jsx";
 import NotificationAlert from "react-notification-alert";
@@ -9,6 +8,7 @@ import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
+import { get } from 'lodash';
 
 class Registry extends React.Component {
   constructor(props) {
@@ -66,7 +66,9 @@ class Registry extends React.Component {
       icon: "nc-icon nc-bell-55",
       autoDismiss: 3
     };
-    this.refs.notificationAlert.notificationAlert(options);
+    if(get(this.refs, 'notificationAlert')){
+      this.refs.notificationAlert.notificationAlert(options);
+    }
   }
 
   async handleSubmit(event) {
@@ -90,7 +92,7 @@ class Registry extends React.Component {
     const { loginState , registryState} = this.props;
 
     if (loginState.isAuthenticated) {
-      return <Redirect from="/" to="/supermarket-test"/>;
+      return <Redirect from="/" to="/home"/>;
     }
 
     if (isCamara ) {

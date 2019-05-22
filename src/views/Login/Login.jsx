@@ -9,7 +9,7 @@ import imagenHeaderLogin from "../../assets/img/lider.jpg";
 import mike from "../../assets/img/mike.jpg";
 import NotificationAlert from "react-notification-alert";
 import { Redirect } from "react-router-dom";
-
+import { get } from "lodash";
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -39,7 +39,9 @@ class Login extends React.Component {
       icon: "nc-icon nc-bell-55",
       autoDismiss: 3
     };
-    this.refs.notificationAlert.notificationAlert(options);
+    if(get(this.refs, 'notificationAlert')){
+      this.refs.notificationAlert.notificationAlert(options);
+    }
   }
 
   messageError() {
@@ -50,7 +52,7 @@ class Login extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    await this.setState({email: event.target.elements.email.value, password: event.target.elements.password.value});
+    //await this.setState({email: event.target.elements.email.value, password: event.target.elements.password.value});
     this.props.onLogin(this.state);
   }
   
@@ -61,7 +63,7 @@ class Login extends React.Component {
   render() {
     const { loginState } = this.props;
     if (loginState.isAuthenticated) {
-      return <Redirect from="/" to="/supermarket-test"/>;
+      return <Redirect from="/" to="/home"/>;
     }
 
     const { isRegistry } = this.state;
@@ -145,7 +147,7 @@ class Login extends React.Component {
                           </small>
                         </span>
                         <Button
-                          color="info"
+                          color="warning"
                           block
                           onClick={() => this.onRegistry()}
                         >

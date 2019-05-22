@@ -1,18 +1,17 @@
-import UserPage from "../views/UserPage/UserPage.jsx";
-import NfcPage from "../views/NfcPage/NfcPage.jsx";
+import SupermarketTest from "../views/SupermarketTest/SupermarketTest.jsx";
+import HomePage from "../views/Home/HomePage.jsx";
 
 var dashRoutes = [
+  {
+    path: "/home",
+    name: "Home",
+    component: HomePage
+  },
   {
     path: "/supermarket-test",
     name: "Supermarket Test",
     icon: "nc-icon nc-cart-simple",
-    component: UserPage
-  },
-  {
-    path: "/nfc-rfid",
-    name: "NFC RFID",
-    icon: "nc-icon nc-zoom-split",
-    component: NfcPage
+    component: SupermarketTest
   }
 ];
 export default dashRoutes;
