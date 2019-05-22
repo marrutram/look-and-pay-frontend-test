@@ -1,5 +1,6 @@
 import SupermarketTest from "../views/SupermarketTest/SupermarketTest.jsx";
 import HomePage from "../views/Home/HomePage.jsx";
+import MyPuchases from "../views/MyPuchases/MyPuchases";
 
 var dashRoutes = [
   {
@@ -13,6 +14,13 @@ var dashRoutes = [
     name: "Supermarket Test",
     icon: "nc-icon nc-cart-simple",
     component: SupermarketTest
-  }
+  },
+  {
+    path: "/my-puchases",
+    name: "My Puchases",
+    icon: "nc-icon nc-cart-simple",
+    component: MyPuchases
+  },
+  
 ];
 export default dashRoutes;
