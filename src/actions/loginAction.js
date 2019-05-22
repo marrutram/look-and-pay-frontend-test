@@ -1,5 +1,5 @@
 import { login } from '../api/user.api';
-import { LOGIN_SUCCESS, LOGIN_STARTED, LOGIN_FAILURE } from '../constante/typeAction';
+import { LOGIN_SUCCESS, LOGIN_STARTED, LOGIN_FAILURE, LOGOUT_SUCCESS } from '../constante/typeAction';
 import { get } from 'lodash';
 
 export const loginAction = (data) => {
@@ -19,6 +19,12 @@ export const loginAction = (data) => {
       });
   };
 };
+
+export const logoutAction = () => {
+  return dispatch => {
+    dispatch(logoutSuccess())
+  }
+}
 
 export const clearErrorLoginAction = () => {
   return dispatch => {
@@ -40,4 +46,8 @@ const loginFailure = error => ({
   payload: {
     error
   }
+});
+
+const logoutSuccess = () => ({
+  type: LOGOUT_SUCCESS,
 });

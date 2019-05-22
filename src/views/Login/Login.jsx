@@ -1,12 +1,10 @@
 import React from "react";
 import { Card, CardBody, CardFooter, Row, Col } from "reactstrap";
 import { connect } from 'react-redux';
-import { loginAction, clearErrorLoginAction } from '../../actions/loginAction';
-import CardAuthor from "../../components/CardElements/CardAuthor.jsx";
+import { loginAction, clearErrorLoginAction, logoutAction } from '../../actions/loginAction';
 import FormInputs from "../../components/FormInputs/FormInputs.jsx";
 import Button from "../../components/CustomButton/CustomButton.jsx";
 import imagenHeaderLogin from "../../assets/img/logo.svg";
-import mike from "../../assets/img/walmart_spark.png";
 import NotificationAlert from "react-notification-alert";
 import { Redirect } from "react-router-dom";
 import { get } from "lodash";
@@ -17,13 +15,12 @@ class Login extends React.Component {
       visible: true,
       isRegistry: false
     };
-    localStorage.removeItem('state');
     this.onDismiss = this.onDismiss.bind(this);
     this.notify = this.notify.bind(this);
   }
   onDismiss() {}
   componentDidMount() {
-    localStorage.removeItem('state');
+    this.props.onLogout();
   }
   notify(error) {
     const options = {
@@ -172,6 +169,9 @@ const mapDispatchToProps = dispatch => {
     },
     clearErrorLogin: () => {
       dispatch(clearErrorLoginAction());
+    },
+    onLogout: () => {
+      dispatch(logoutAction())
     }
   };
 };

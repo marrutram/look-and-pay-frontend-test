@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_STARTED, LOGIN_FAILURE } from '../constante/typeAction';
+import { LOGIN_SUCCESS, LOGIN_STARTED, LOGIN_FAILURE, LOGOUT_SUCCESS } from '../constante/typeAction';
 const initialState = {
   loading: false,
   login: null,
@@ -29,6 +29,14 @@ export default function loginReducer(state = initialState, action) {
         loading: false,
         isAuthenticated: false,
         error: action.payload.error
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        login: null,
+        isAuthenticated: false,
+        error: null
       };
     default:
       return state;

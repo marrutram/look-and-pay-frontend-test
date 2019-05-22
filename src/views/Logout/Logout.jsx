@@ -1,15 +1,28 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { connect } from 'react-redux';
+import { logoutAction } from '../../actions/loginAction';
 
 class Logout extends React.Component {
 
   componentDidMount() {
-    localStorage.removeItem('state');
+    this.props.onLogout();
   }
 
   render() {
-    return  <Redirect from="/" to="/login"/>;
+    return  null;
   }
 }
 
-export default Logout;
+const mapStateToProps = (state) => ({
+  ...state
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogout: () => {
+      dispatch(logoutAction());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Logout);
