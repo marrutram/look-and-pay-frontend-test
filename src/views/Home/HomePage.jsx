@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, CardHeader, CardBody, CardTitle, CardFooter, Row, Col } from "reactstrap";
+import { Card, CardBody, CardFooter, Row, Col } from "reactstrap";
+
 import CardAuthor from "../../components/CardElements/CardAuthor.jsx";
 import Button from "../../components/CustomButton/CustomButton.jsx";
 import damirBosnjak from "../../assets/img/logo.svg";
