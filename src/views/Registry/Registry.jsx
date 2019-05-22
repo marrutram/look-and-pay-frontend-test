@@ -1,7 +1,8 @@
 import React, {Fragment} from "react";
-import { Card, CardHeader, CardBody, Spinner, CardFooter, Row, Col } from "reactstrap";
+import { Card, CardHeader, CardBody, CardFooter, Row, Col } from "reactstrap";
 import FormInputs from "../../components/FormInputs/FormInputs.jsx";
 import Button from "../../components/CustomButton/CustomButton.jsx";
+import Loader from "../../components/Loader";
 import NotificationAlert from "react-notification-alert";
 import { registryAction } from '../../actions/registryAction';
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
@@ -152,117 +153,110 @@ class Registry extends React.Component {
                     <CardBody>
                       {
                         registryState.loading ?
-                          <div style={{minHeight: '240px'}} className="d-flex flex-column justify-content-center align-items-center">
-                            <div>
-                              <Spinner style={{ width: '3rem', height: '3rem' }} color="primary" type="grow"/>
-                            </div>
-                            <div>
-                              <p>Loading...</p>
-                            </div>
-                          </div>
+                          <Loader />
                         :
-                        <Fragment>
-                          <h5> Registry </h5>
-                          <form onSubmit={this.handleSubmit.bind(this)}>
-                            <FormInputs
-                              ncols={["col-md-6 col-xs-12", "col-md-6 col-xs-12"]}
-                              proprieties={[
-                                {
-                                  label: "Name",
-                                  inputProps: {
-                                    type: "text",
-                                    name: "name",
-                                    placeholder: "Name",
-                                    required:true,
-                                    defaultValue: this.state.name
-                                  }
-                                },
-                                {
-                                  label: "Last Name",
-                                  inputProps: {
-                                    type: "text",
-                                    name: "lastName",
-                                    placeholder: "Last Name",
-                                    required:true,
-                                    defaultValue: this.state.lastName
-                                  }
-                                }
-                              ]}
-                            />
-                            <FormInputs
-                              ncols={["col-md-6 col-xs-12", "col-md-6  col-xs-12"]}
-                              proprieties={[
-                                {
-                                  label: "Email address",
-                                  inputProps: {
-                                    type: "email",
-                                    name: "email",
-                                    placeholder: "Email",
-                                    required:true,
-                                    defaultValue: this.state.email
-                                  }
-                                },
-                                {
-                                  label: "Password",
-                                  inputProps: {
-                                    type: "password",
-                                    name: "password",
-                                    placeholder: "Password",
-                                    required:true,
-                                    defaultValue: this.state.password
+                          <Fragment>
+                            <h5> Registry </h5>
+                            <form onSubmit={this.handleSubmit.bind(this)}>
+                              <FormInputs
+                                ncols={["col-md-6 col-xs-12", "col-md-6 col-xs-12"]}
+                                proprieties={[
+                                  {
+                                    label: "Name",
+                                    inputProps: {
+                                      type: "text",
+                                      name: "name",
+                                      placeholder: "Name",
+                                      required:true,
+                                      defaultValue: this.state.name
+                                    }
+                                  },
+                                  {
+                                    label: "Last Name",
+                                    inputProps: {
+                                      type: "text",
+                                      name: "lastName",
+                                      placeholder: "Last Name",
+                                      required:true,
+                                      defaultValue: this.state.lastName
                                     }
                                   }
-                              ]}
-                            />
-                            <FormInputs
-                              ncols={["col-md-4  col-xs-12", "col-md-4  col-xs-12", "col-md-4  col-xs-12"]}
-                              proprieties={[
-                                {
-                                  label: "Name on Card",
-                                  inputProps: {
-                                    type: "text",
-                                    name: "nameCard",
-                                    placeholder: "Name on Card",
-                                    required:true,
-                                    defaultValue: this.state.nameCard
+                                ]}
+                              />
+                              <FormInputs
+                                ncols={["col-md-6 col-xs-12", "col-md-6  col-xs-12"]}
+                                proprieties={[
+                                  {
+                                    label: "Email address",
+                                    inputProps: {
+                                      type: "email",
+                                      name: "email",
+                                      placeholder: "Email",
+                                      required:true,
+                                      defaultValue: this.state.email
+                                    }
+                                  },
+                                  {
+                                    label: "Password",
+                                    inputProps: {
+                                      type: "password",
+                                      name: "password",
+                                      placeholder: "Password",
+                                      required:true,
+                                      defaultValue: this.state.password
+                                      }
+                                    }
+                                ]}
+                              />
+                              <FormInputs
+                                ncols={["col-md-4  col-xs-12", "col-md-4  col-xs-12", "col-md-4  col-xs-12"]}
+                                proprieties={[
+                                  {
+                                    label: "Name on Card",
+                                    inputProps: {
+                                      type: "text",
+                                      name: "nameCard",
+                                      placeholder: "Name on Card",
+                                      required:true,
+                                      defaultValue: this.state.nameCard
+                                    }
+                                  },
+                                  {
+                                    label: "Card Number",
+                                    inputProps: {
+                                      type: "text",
+                                      name: "numberCard",
+                                      placeholder: "Card Number",
+                                      required:true,
+                                      defaultValue: this.state.numberCard
+                                    }
+                                  },
+                                  {
+                                    label: "Expirate Date",
+                                    inputProps: {
+                                      type: "number",
+                                      name: "expDateCard",
+                                      placeholder: "Expirate Date",
+                                      required:true,
+                                      defaultValue: this.state.expDateCard
+                                    }
                                   }
-                                },
-                                {
-                                  label: "Card Number",
-                                  inputProps: {
-                                    type: "text",
-                                    name: "numberCard",
-                                    placeholder: "Card Number",
-                                    required:true,
-                                    defaultValue: this.state.numberCard
-                                  }
-                                },
-                                {
-                                  label: "Expirate Date",
-                                  inputProps: {
-                                    type: "number",
-                                    name: "expDateCard",
-                                    placeholder: "Expirate Date",
-                                    required:true,
-                                    defaultValue: this.state.expDateCard
-                                  }
-                                }
-                              ]}
-                            />
-                            <Row>
-                            <Col md={12}>
-                              <span className="text-danger">
-                                <small>
-                                  {registryState.error}
-                                </small>
-                              </span>
-                            </Col>
-                              <div className="update ml-auto mr-auto">
-                                <Button color="primary" round>Next</Button>
-                              </div>
-                            </Row>
-                          </form>
-                        </Fragment>
+                                ]}
+                              />
+                              <Row>
+                              <Col md={12}>
+                                <span className="text-danger">
+                                  <small>
+                                    {registryState.error}
+                                  </small>
+                                </span>
+                              </Col>
+                                <div className="update ml-auto mr-auto">
+                                  <Button color="primary" round>Next</Button>
+                                </div>
+                              </Row>
+                            </form>
+                          </Fragment>
                       }
                     </CardBody>
                 </Card>
