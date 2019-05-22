@@ -69,11 +69,6 @@
   overflow: inherit;
 }
 
-#inner-circle:before {
-  content: "PAY";
-  font-weight: bold;
-}
-
 #inner-circle {
   padding-top: 12px;
   font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
@@ -89,7 +84,7 @@
   padding: 5px 5px 5px 35% !important;
 }
 
-.card-pay .image, .header-login, .logo-home-header {
+.card-pay .image, .header-login, .logo-home-header, .logo-look-register {
   background:rgb(0, 113, 206) ;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -112,6 +107,21 @@
   max-width: 40% !important;
 }
 
-.logo-home {
+.logo-home, .logo-look-register-img  {
   height: 100%;
+}
+.logo-look-register{
+  background: rgb(0, 113, 206)!important;
+}
+
+#inner-circle:before {
+  content: "PAY";
+  font-weight: bold;
+}
+
+.logo-look-register-card {
+  #inner-circle:before {
+    content: "OK" !important;
+    font-weight: bold;
+  }
 }

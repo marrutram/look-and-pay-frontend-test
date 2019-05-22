@@ -13,7 +13,12 @@ export function signup(arg) {
             name: "${arg.name}",
             lastname: "${arg.lastName}",
             urlImagen: "${arg.urlImagen}"
-          )
+          ){
+            name
+            lastnanme
+            email
+            token
+          }
         }
       `
     }
@@ -30,7 +35,12 @@ export function login(arg) {
           login(
             email: "${arg.email}", 
             password: "${arg.password}"
-          )
+          ){
+            name
+            lastnanme
+            email
+            token
+          }
         }
       `
     }

@@ -8,6 +8,7 @@ export const loginAction = (data) => {
 
     login(data)
       .then(res => {
+        console.log("res::", res);
         if(get(res, 'data.errors')) {
           dispatch(loginFailure(get(res, 'data.errors[0].message')));
         } else {
@@ -15,6 +16,7 @@ export const loginAction = (data) => {
         }
       })
       .catch(err => {
+        console.log("err::", err);
         dispatch(loginFailure(err.message));
       });
   };

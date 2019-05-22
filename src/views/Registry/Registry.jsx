@@ -9,6 +9,7 @@ import 'react-html5-camera-photo/build/css/index.css';
 import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
 import { get } from 'lodash';
+import registryLogo from "../../assets/img/logo.svg";
 
 class Registry extends React.Component {
   constructor(props) {
@@ -102,11 +103,14 @@ class Registry extends React.Component {
           <Row>
             <Col md={2}></Col>
             <Col md={8} xs={12}>
-              <Card className="card-user"> 
-                <CardHeader>
-                  <CardTitle tag="h4">Smile in photo</CardTitle>
-                </CardHeader>
+              <Card className="card-user logo-look-register-card"> 
+                <CardHeader className="logo-look-register">
+                    <div className="image">
+                      <img className="logo-look-register-img" src={registryLogo} alt="..." />
+                    </div>
+                    </CardHeader>
                 <CardBody>
+                <h5> Registry </h5>
                   <Camera
                     onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
                     onCameraError = { (error) => { this.onCameraError(error); } }
@@ -142,10 +146,13 @@ class Registry extends React.Component {
              <Col md={2}></Col>
               <Col md={8} pl={1} xs={12}>
                 <Card className="card-user">
-                    <CardHeader>
-                      <CardTitle>Registry</CardTitle>
+                    <CardHeader className="logo-look-register">
+                    <div className="image">
+                      <img className="logo-look-register-img" src={registryLogo} alt="..." />
+                    </div>
                     </CardHeader>
                     <CardBody>
+                      <h5> Registry </h5>
                       <form onSubmit={this.handleSubmit.bind(this)}>
                         <FormInputs
                           ncols={["col-md-6 col-xs-12", "col-md-6 col-xs-12"]}
