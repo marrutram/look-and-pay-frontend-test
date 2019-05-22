@@ -1,11 +1,12 @@
 import React from "react";
-import { Card, CardHeader, CardBody, CardTitle, CardFooter, Row, Col } from "reactstrap";
+import { Card, Table, CardHeader, CardBody, CardTitle, CardFooter, Row, Col } from "reactstrap";
 
 import CardAuthor from "../../components/CardElements/CardAuthor.jsx";
 import FormInputs from "../../components/FormInputs/FormInputs.jsx";
 import Button from "../../components/CustomButton/CustomButton.jsx";
 
-import damirBosnjak from "../../assets/img/damir-bosnjak.jpg";
+import supermarketPhoto from "../../assets/img/super.jpeg";
+
 import mike from "../../assets/img/mike.jpg";
 import NotificationAlert from "react-notification-alert";
 
@@ -13,6 +14,8 @@ import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
+
+import { thead, tbody } from "../../variables/general";
 
 class User extends React.Component {
   constructor(props) {
@@ -40,46 +43,31 @@ class User extends React.Component {
   }
 
   onDismiss() {}
-  notify(place) {
-    var color = Math.floor(Math.random() * 5 + 1);
-    var type;
-    switch (color) {
-      case 1:
-        type = "primary";
-        break;
-      case 2:
-        type = "success";
-        break;
-      case 3:
-        type = "danger";
-        break;
-      case 4:
-        type = "warning";
-        break;
-      case 5:
-        type = "info";
-        break;
-      default:
-        break;
-    }
-    var options = {};
-    options = {
-      place: place,
+  notify(options) {
+    this.refs.notificationAlert.notificationAlert(options);
+  }
+
+  messageWelcome() {
+    const options = {
+      place: "tr",
       message: (
         <div>
           <div>
-            Welcome to <b>Paper Dashboard React</b> - a beautiful freebie for
-            every web developer.
+            Welcome to the <b>automated payment</b> simulation.
           </div>
         </div>
       ),
-      type: type,
+      type: "info",
       icon: "nc-icon nc-bell-55",
       autoDismiss: 7
     };
     this.refs.notificationAlert.notificationAlert(options);
   }
 
+  componentDidMount() {
+    this.messageWelcome();
+  }
+  
   render() {
     const { loginState } = this.props;
 
@@ -94,27 +82,10 @@ class User extends React.Component {
           <Col md={4} xs={12}>
             <Card className="card-user">
               <div className="image">
-                <img src={damirBosnjak} alt="..." />
+                <img src={supermarketPhoto} alt="..." />
               </div>
               <CardBody>
-                <CardAuthor
-                  avatar={mike}
-                  avatarAlt="..."
-                  title="Chet Faker"
-                  description="@chetfaker"
-                />
-                <p className="description text-center">
-                  "I like the way you work it{" "}<br/>
-                    No diggity <br/>
-                    I wanna bag it up"
-                </p>
-                <Button
-                  color="primary"
-                  block
-                  onClick={() => this.notify("tc")}
-                >
-                  Bottom Center
-                </Button>
+                
                 <Camera
                   onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
                   onCameraError = { (error) => { this.onCameraError(error); } }
@@ -136,224 +107,104 @@ class User extends React.Component {
                 <hr />
                 <div className="button-container">
                   <Row>
-                    <Col xs={6} sm={6} md={6} lg={3} className="ml-auto">
+                    <Col xs={12} sm={12} md={12} lg={12} className="mr-auto ml-auto">
                       <h5>
-                        12
-                        <br/>
-                        <small>Files</small>
-                      </h5>
-                    </Col>
-                    <Col xs={6} sm={6} md={6} lg={4} className="mr-auto ml-auto">
-                      <h5>
-                        2GB
-                        <br/>
-                        <small>Used</small>
-                      </h5>
-                    </Col>
-                    <Col lg={3} className="mr-auto">
-                      <h5>
-                        24,6$
-                        <br/>
-                        <small>Spent</small>
+                        Smile in photo
                       </h5>
                     </Col>
                   </Row>
                 </div>
               </CardFooter>
             </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle tag="h4">Team Members</CardTitle>
-              </CardHeader>
-              <CardBody>
-                <ul className="list-unstyled team-members">
-                  <li>
-                    <Row>
-                      <Col xs={2} md={2}>
-                        <div className="avatar">
-                          <img src={mike} alt="mike" className="img-circle img-no-padding img-responsive" />
-                        </div>
-                      </Col>
-                      <Col xs={7} md={7}>
-                        DJ Khaled
-                        <br />
-                        <span className="text-muted">
-                          <small>
-                          Offline
-                        </small>
-                        </span>
-                      </Col>
-                      <Col xs={3} md={3} className="text-right">
-                        <Button size="sm" color="success" round icon outline>
-                          <i className="fa fa-envelope"></i>
-                        </Button>
-                      </Col>
-                    </Row>
-                  </li>
-                  <li>
-                    <Row>
-                      <Col xs={2} md={2}>
-                        <div className="avatar">
-                          <img src={mike} alt="mike" className="img-circle img-no-padding img-responsive" />
-                        </div>
-                      </Col>
-                      <Col xs={7} md={7}>
-                        Creative Tim
-                        <br />
-                        <span className="text-success">
-                          <small>
-                          Available
-                        </small>
-                        </span>
-                      </Col>
-                      <Col xs={3} md={3} className="text-right">
-                        <Button size="sm" color="success" round icon outline>
-                          <i className="fa fa-envelope"></i>
-                        </Button>
-                      </Col>
-                    </Row>
-                  </li>
-                  <li>
-                    <Row>
-                      <Col xs={2} md={2}>
-                        <div className="avatar">
-                          <img src={mike} alt="mike" className="img-circle img-no-padding img-responsive" />
-                        </div>
-                      </Col>
-                      <Col xs={7} md={7}>
-                        Flume
-                        <br />
-                        <span className="text-danger">
-                          <small>
-                          Busy
-                        </small>
-                        </span>
-                      </Col>
-                      <Col xs={3} md={3} className="text-right">
-                        <Button size="sm" color="success" round icon outline>
-                          <i className="fa fa-envelope"></i>
-                        </Button>
-                      </Col>
-                    </Row>
-                  </li>
-                </ul>
-              </CardBody>
-            </Card>
           </Col>
           <Col md={8} xs={12}>
             <Card className="card-user">
-              <CardHeader>
-                <CardTitle>Edit Profile</CardTitle>
-              </CardHeader>
               <CardBody>
                 <form>
                   <FormInputs
-                    ncols={["col-md-5 pr-1", "col-md-3 px-1", "col-md-4 pl-1"]}
+                    ncols={["col-md-6 col-xs-12", "col-md-6 col-xs-12"]}
                     proprieties={[
                       {
-                        label: "Company (disabled)",
+                        label: "Supermarket",
                         inputProps: {
                           type: "text",
                           disabled: true,
-                          defaultValue: "Creative Code Inc."
+                          defaultValue: "lider Vitacura."
                         }
                       },
                       {
-                        label: "Username",
+                        label: "Electronic bill",
                         inputProps: {
                           type: "text",
-                          defaultValue: "chetfaker"
-                        }
-                      },
-                      {
-                        label: "Email address",
-                        inputProps: {
-                          type: "email",
-                          placeholder: "Email"
+                          disabled: true,
+                          defaultValue: "000015354123143."
                         }
                       }
                     ]}
                   />
-                  <FormInputs
-                    ncols={["col-md-6 pr-1", "col-md-6 pl-1"]}
+                  
+                   <FormInputs
+                    ncols={["col-md-6 col-xs-12", "col-md-6 col-xs-12"]}
                     proprieties={[
                       {
-                        label: "First Name",
+                        label: "Date",
                         inputProps: {
                           type: "text",
-                          placeholder: "First Name",
-                          defaultValue: "Chet"
+                          disabled: true,
+                          defaultValue: "12/02/2019"
                         }
                       },
                       {
-                        label: "Last Name",
+                        label: "Hour",
                         inputProps: {
                           type: "text",
-                          placeholder: "Last Name",
-                          defaultValue: "Faker"
+                          disabled: true,
+                          defaultValue: "12:30"
                         }
                       }
                     ]}
                   />
-                  <FormInputs
-                    ncols={["col-md-12"]}
-                    proprieties={[
-                      {
-                        label: "Address",
-                        inputProps: {
-                          type: "text",
-                          placeholder: "Home Address",
-                          defaultValue:
-                            "Melbourne, Australia"
-                        }
-                      }
-                    ]}
-                  />
-                  <FormInputs
-                    ncols={["col-md-4 pr-1", "col-md-4 px-1", "col-md-4 pl-1"]}
-                    proprieties={[
-                      {
-                        label: "City",
-                        inputProps: {
-                          type: "text",
-                          defaultValue: "Melbourne",
-                          placeholder: "City"
-                        }
-                      },
-                      {
-                        label: "Country",
-                        inputProps: {
-                          type: "text",
-                          defaultValue: "Australia",
-                          placeholder: "Country"
-                        }
-                      },
-                      {
-                        label: "Postal Code",
-                        inputProps: {
-                          type: "number",
-                          placeholder: "ZIP Code"
-                        }
-                      }
-                    ]}
-                  />
-                  <FormInputs
-                    ncols={["col-md-12"]}
-                    proprieties={[
-                      {
-                        label: "About Me",
-                        inputProps: {
-                          type: "textarea",
-                          defaultValue:
-                            "Oh so, your weak rhyme You doubt I'll bother, reading into it",
-                          placeholder: "Here can be your description"
-                        }
-                      }
-                    ]}
-                  />
+                  <Table responsive>
+                    <thead className="text-primary">
+                      <tr>
+                        {thead.map((prop, key) => {
+                          if (key === thead.length - 1)
+                            return (
+                              <th key={key} className="text-right">
+                                {prop}
+                              </th>
+                            );
+                          return <th key={key}>{prop}</th>;
+                        })}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {tbody.map((prop, key) => {
+                        return (
+                          <tr key={key}>
+                            {prop.data.map((prop, key) => {
+                              if (key === 0)
+                                return (
+                                  <td key={key}>
+                                    <img src={prop} alt="" className="img-circle img-no-padding img-responsive img-product" />
+                                  </td>
+                                );
+                              if (key === thead.length - 1)
+                                return (
+                                  <td key={key} className="text-right">
+                                    {prop}
+                                  </td>
+                                );
+                              return <td key={key}>{prop}</td>;
+                            })}
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
                   <Row>
                     <div className="update ml-auto mr-auto">
-                      <Button color="primary" round>Update Profile</Button>
+                      <Button color="primary" round>Pay</Button>
                     </div>
                   </Row>
                 </form>

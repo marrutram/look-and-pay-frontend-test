@@ -11,8 +11,12 @@ import "./assets/scss/paper-dashboard.scss";
 import "./assets/demo/demo.css";
 import indexRoutes from "./routes/index.jsx";
 import * as token from "./middleware/token"
+import {saveState} from './localStore'
 
 const store = configureStore();
+store.subscribe( () => {
+  saveState(store.getState())
+})
 token.setToken(store);
 const hist = createBrowserHistory();
 ReactDOM.render(

@@ -17,48 +17,35 @@ class Login extends React.Component {
       visible: true,
       isRegistry: false
     };
+    localStorage.removeItem('state');
     this.onDismiss = this.onDismiss.bind(this);
     this.notify = this.notify.bind(this);
   }
   onDismiss() {}
-  notify(place) {
-    var color = Math.floor(Math.random() * 5 + 1);
-    var type;
-    switch (color) {
-      case 1:
-        type = "primary";
-        break;
-      case 2:
-        type = "success";
-        break;
-      case 3:
-        type = "danger";
-        break;
-      case 4:
-        type = "warning";
-        break;
-      case 5:
-        type = "info";
-        break;
-      default:
-        break;
-    }
-    var options = {};
-    options = {
-      place: place,
+  componentDidMount() {
+    localStorage.removeItem('state');
+  }
+  notify(error) {
+    const options = {
+      place: "tc",
       message: (
         <div>
           <div>
-            Welcome to <b>Paper Dashboard React</b> - a beautiful freebie for
-            every web developer.
+             <b>Error in Login</b> <br/> {error}
           </div>
         </div>
       ),
-      type: type,
+      type: "danger",
       icon: "nc-icon nc-bell-55",
-      autoDismiss: 7
+      autoDismiss: 3
     };
     this.refs.notificationAlert.notificationAlert(options);
+  }
+
+  messageError() {
+    if(!this.props.loginState.loading && this.props.loginState.error != null) {
+      this.notify(this.props.loginState.error);
+    }
   }
 
   async handleSubmit(event) {
@@ -69,20 +56,21 @@ class Login extends React.Component {
   
   async onRegistry() {
     await this.setState({isRegistry: true});
-    console.log("entro!!!!", this.state);
   }
 
   render() {
     const { loginState } = this.props;
     if (loginState.isAuthenticated) {
-      return <Redirect from="/" to="/user-page"/>;
+      return <Redirect from="/" to="/supermarket-test"/>;
     }
 
     const { isRegistry } = this.state;
     if (isRegistry) {
       return <Redirect from="/" to="/registry"/>;
     }
-
+  
+    this.messageError();
+  
     return (
       <div className="content">
         <NotificationAlert ref="notificationAlert" />
@@ -98,7 +86,7 @@ class Login extends React.Component {
                   <CardAuthor
                     avatar={mike}
                     avatarAlt="..."
-                    title="Bienvenido"
+                    title="Welcome"
                     description="Look & Pay"
                   />
                   
@@ -110,7 +98,8 @@ class Login extends React.Component {
                           inputProps: {
                             type: "email",
                             name:"email",
-                            placeholder: "Email"
+                            placeholder: "Email",
+                            required:"true",
                             }
                           }
                         ]}
@@ -123,7 +112,8 @@ class Login extends React.Component {
                           inputProps: {
                             type: "password",
                             name: "password",
-                            placeholder: "Password"
+                            placeholder: "Password",
+                            required:"true",
                             }
                           }
                         ]}
@@ -140,7 +130,7 @@ class Login extends React.Component {
                     <Row>
                       <Col xs={12} sm={12} md={12} lg={12} className="ml-auto">
                         <Button
-                          color="success"
+                          color="primary"
                           block
                           type="submit"
                         >
@@ -149,6 +139,11 @@ class Login extends React.Component {
                       </Col>
                       <hr />
                       <Col xs={12} pr={1} pl={1} sm={12} md={12} lg={12} className="ml-auto">
+                         <span className="text-right">
+                          <small>
+                          You do not have an account?
+                          </small>
+                        </span>
                         <Button
                           color="info"
                           block

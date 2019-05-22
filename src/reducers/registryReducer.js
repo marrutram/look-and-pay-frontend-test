@@ -11,7 +11,9 @@ export default function registryReducer(state = initialState, action) {
     case REGISTRY_STARTED:
       return {
         ...state,
-        loading: true
+        loading: true,
+        isRegistry: false,
+        error: null,
       };
     case REGISTRY_SUCCESS:
       return {

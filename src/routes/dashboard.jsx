@@ -3,9 +3,9 @@ import NfcPage from "../views/NfcPage/NfcPage.jsx";
 
 var dashRoutes = [
   {
-    path: "/user-page",
-    name: "Usuario",
-    icon: "nc-icon nc-single-02",
+    path: "/supermarket-test",
+    name: "Supermarket Test",
+    icon: "nc-icon nc-cart-simple",
     component: UserPage
   },
   {

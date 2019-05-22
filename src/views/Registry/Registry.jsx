@@ -1,17 +1,13 @@
 import React from "react";
 import { Card, CardHeader, CardBody, CardTitle, CardFooter, Row, Col } from "reactstrap";
-
 import CardAuthor from "../../components/CardElements/CardAuthor.jsx";
 import FormInputs from "../../components/FormInputs/FormInputs.jsx";
 import Button from "../../components/CustomButton/CustomButton.jsx";
-
 import NotificationAlert from "react-notification-alert";
-
 import { registryAction } from '../../actions/registryAction';
-
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
-import {  Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
 
 class Registry extends React.Component {
@@ -25,6 +21,13 @@ class Registry extends React.Component {
     this.onDismiss = this.onDismiss.bind(this);
     this.notify = this.notify.bind(this);
   }
+
+  messageError() {
+    if(!this.props.registryState.isRegister && !this.props.registryState.loading && this.props.registryState.error != null) {
+      this.notify(this.props.registryState.error)
+    }
+  }
+
   async onTakePhoto (dataUri) {
     await this.setState({
       urlImagen: dataUri,
@@ -48,13 +51,14 @@ class Registry extends React.Component {
   }
 
   onDismiss() {}
+
   notify(error) {
     const options = {
       place: "tc",
       message: (
         <div>
           <div>
-             <b>Error in registry:</b> {error}
+             <b>Error in registry</b> <br/> {error}
           </div>
         </div>
       ),
@@ -86,7 +90,7 @@ class Registry extends React.Component {
     const { loginState , registryState} = this.props;
 
     if (loginState.isAuthenticated) {
-      return <Redirect from="/" to="/user-page"/>;
+      return <Redirect from="/" to="/supermarket-test"/>;
     }
 
     if (isCamara ) {
@@ -127,6 +131,7 @@ class Registry extends React.Component {
     )
     }
     if(isPerfil || !registryState.isRegistry) {
+      this.messageError();
       return (
         <div className="content">
           <NotificationAlert ref="notificationAlert" />

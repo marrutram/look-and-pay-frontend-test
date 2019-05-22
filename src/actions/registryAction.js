@@ -23,16 +23,12 @@ export const registryAction = (data) => {
 
 const loginSuccess = todo => ({
   type: LOGIN_SUCCESS,
-  payload: {
-    ...todo
-  }
+  payload: todo
 });
 
 const registrySuccess = todo => ({
   type: REGISTRY_SUCCESS,
-  payload: {
-    ...todo
-  }
+  payload: todo
 });
 
 const registryStarted = () => ({

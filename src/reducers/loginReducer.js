@@ -11,7 +11,9 @@ export default function loginReducer(state = initialState, action) {
     case LOGIN_STARTED:
       return {
         ...state,
-        loading: true
+        loading: true,
+        isAuthenticated: false,
+        error: null
       };
     case LOGIN_SUCCESS:
       return {
@@ -19,7 +21,7 @@ export default function loginReducer(state = initialState, action) {
         loading: false,
         isAuthenticated: true,
         error: null,
-        login: action.payload?action.payload:state.login
+        login: action.payload
       };
     case LOGIN_FAILURE:
       return {
