@@ -7,8 +7,24 @@ import Footer from "../../components/Footer/Footer.jsx";
 import Sidebar from "../../components/Sidebar/Sidebar.jsx";
 import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.jsx";
 import dashboardRoutes from "../../routes/dashboard.jsx";
+import { connect } from 'react-redux';
 var ps;
 class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      auth: false
+    }
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    const {loginState: { isAuthenticated }} = props;
+    if (typeof isAuthenticated === 'boolean') {
+      return Object.assign({}, state, {auth: isAuthenticated});
+    }
+    return state
+  }
+
   componentDidMount() {
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(this.refs.mainPanel);
@@ -28,6 +44,10 @@ class Dashboard extends React.Component {
     }
   }
   render() {
+    const { auth } = this.state;
+    if (!auth) {
+      return <Redirect from="/" to="/login"/>;
+    }
     return (
       <div className="wrapper">
         <Sidebar
@@ -56,4 +76,9 @@ class Dashboard extends React.Component {
     );
   }
 }
-export default Dashboard;
+
+const mapStateToProps = (state) => ({
+  ...state
+});
+
+export default connect(mapStateToProps)(Dashboard);
