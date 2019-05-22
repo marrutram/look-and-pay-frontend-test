@@ -101,7 +101,7 @@ class Login extends React.Component {
                             type: "email",
                             name:"email",
                             placeholder: "Email",
-                            required:"true",
+                            required:true,
                             }
                           }
                         ]}
@@ -115,7 +115,7 @@ class Login extends React.Component {
                             type: "password",
                             name: "password",
                             placeholder: "Password",
-                            required:"true",
+                            required:true,
                             }
                           }
                         ]}
