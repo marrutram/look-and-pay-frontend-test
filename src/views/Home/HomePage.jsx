@@ -65,8 +65,8 @@ class Home extends React.Component {
         <Row>
           <Col md={12} xs={12}>
             <Card className="card-user">
-              <div className="image">
-                <img src={damirBosnjak} alt="..." />
+              <div className="image logo-home-header">"
+                <img className="logo-home" src={damirBosnjak} alt="..." />
               </div>
               <CardBody>
                 <p className="description text-justify">

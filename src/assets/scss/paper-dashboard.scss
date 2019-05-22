@@ -77,6 +77,8 @@
 #inner-circle {
   padding-top: 12px;
   font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  background: rgb(0, 113, 206)!important;
+  color: white !important;
 }
 
 .logo-look-pay {
@@ -87,16 +89,29 @@
   padding: 5px 5px 5px 35% !important;
 }
 
-.card-pay .image {
+.card-pay .image, .header-login, .logo-home-header {
   background:rgb(0, 113, 206) ;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  padding: 25px 5px 5px 30% !important;
+  padding: 25px 5px 5px 35% !important;
 }
+
+.logo-home-header {
+  padding: 25px 5px 5px 42% !important;
+}
+
 .form-control {
   background-color: transparent !important;
 }
 
 .logo-look-pay-spark {
   max-width: 40% !important;
+}
+
+.header-login .image, .header-login-img{
+  max-width: 40% !important;
+}
+
+.logo-home {
+  height: 100%;
 }

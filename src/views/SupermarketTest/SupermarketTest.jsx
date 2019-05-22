@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, Table, CardBody, CardFooter, Row, Col } from "reactstrap";
 import FormInputs from "../../components/FormInputs/FormInputs.jsx";
-import Button from "../../components/CustomButton/CustomButton.jsx";
 import supermarketPhoto from "../../assets/img/logo.svg";
 import NotificationAlert from "react-notification-alert";
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
@@ -10,6 +9,7 @@ import { connect } from 'react-redux';
 import { thead, tbody, supermarketArray, productArray} from "../../variables/general";
 import * as moment from 'moment-timezone';
 import { random, map, get } from 'lodash';
+import { createPayAction , clearErrorPayAction} from '../../actions/createPayAction';
 
 class SupermarketTest extends React.Component {
   constructor(props) {
@@ -20,8 +20,17 @@ class SupermarketTest extends React.Component {
     this.onDismiss = this.onDismiss.bind(this);
     this.notify = this.notify.bind(this);
   }
-  onTakePhoto (dataUri) {
-    console.log('takePhoto', dataUri);
+
+  componentDidUpdate(e) {
+    this.messagePayError();
+  } 
+
+  async onTakePhoto (dataUri) {
+    
+    await this.setState({
+      userImage: dataUri
+    });
+    this.props.onPay(this.state);
   }
  
   onCameraError (error) {
@@ -73,24 +82,67 @@ class SupermarketTest extends React.Component {
     const hour =  moment().tz("America/Santiago").format("HH:mm");
     const products = []; 
     let index = random(0, 4);
+    let balance = 0;
     for (let i = 0; i < 3; i++) {
       const product = productArray[index];
-      product.count = random(1, 100);
-      product.total = product.count * product.unit;
+      product.count = String(random(1, 100));
+      product.total = String(product.count * product.unit);
       products.push(product);
       index++;
       tbody.push({
         className: "table-success",
         data: map(product)
       });
+      balance =+ product.total;
     }
     await this.setState({
       supermarket: supermarket,
       electronicBill: electronicBill,
       date: date,
       hour: hour,
+      balance: balance,
       products: products
     });
+  }
+
+  messagePayError() {
+    if(!this.props.createPayState.loading && this.props.createPayState.error != null) {
+      const options = {
+        place: "tc",
+        message: (
+          <div>
+            <div>
+               <b>Error in registry</b> <br/> {this.props.createPayState.error}
+            </div>
+          </div>
+        ),
+        type: "danger",
+        icon: "nc-icon nc-bell-55",
+        autoDismiss: 3
+      };
+      if(get(this.refs, 'notificationAlert')){
+        this.refs.notificationAlert.notificationAlert(options);
+        this.props.clearErrorPay();
+      }
+    } 
+    if(!this.props.createPayState.loading && this.props.createPayState.pay != null) {
+      const options = {
+        place: "tc",
+        message: (
+          <div>
+            <div>
+               <b>success</b> <br/> Pay
+            </div>
+          </div>
+        ),
+        type: "success",
+        icon: "nc-icon nc-bell-55",
+        autoDismiss: 3
+      };
+      if(get(this.refs, 'notificationAlert')){
+        this.refs.notificationAlert.notificationAlert(options);
+      }
+    }
   }
 
   render() {
@@ -235,4 +287,15 @@ const mapStateToProps = (state) => ({
   ...state
 });
 
-export default connect(mapStateToProps)(SupermarketTest);
+const mapDispatchToProps = dispatch => {
+  return {
+    onPay: ({supermarket, electronicBill, date, hour, balance, products, userImage}) => {
+      dispatch(createPayAction({supermarket, electronicBill, date, hour, balance, products, userImage}));
+    },
+    clearErrorPay: () => {
+      dispatch(clearErrorPayAction());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SupermarketTest);
