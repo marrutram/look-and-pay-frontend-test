@@ -20,6 +20,12 @@ export const loginAction = (data) => {
   };
 };
 
+export const clearErrorLoginAction = () => {
+  return dispatch => {
+    dispatch(loginFailure(null));
+  };
+};
+
 const loginSuccess = todo => ({
   type: LOGIN_SUCCESS,
   payload: todo

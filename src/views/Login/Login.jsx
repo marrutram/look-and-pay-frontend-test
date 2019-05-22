@@ -1,12 +1,12 @@
 import React from "react";
 import { Card, CardBody, CardFooter, Row, Col } from "reactstrap";
 import { connect } from 'react-redux';
-import { loginAction } from '../../actions/loginAction';
+import { loginAction, clearErrorLoginAction } from '../../actions/loginAction';
 import CardAuthor from "../../components/CardElements/CardAuthor.jsx";
 import FormInputs from "../../components/FormInputs/FormInputs.jsx";
 import Button from "../../components/CustomButton/CustomButton.jsx";
-import imagenHeaderLogin from "../../assets/img/lider.jpg";
-import mike from "../../assets/img/mike.jpg";
+import imagenHeaderLogin from "../../assets/img/logo.svg";
+import mike from "../../assets/img/walmart_spark.png";
 import NotificationAlert from "react-notification-alert";
 import { Redirect } from "react-router-dom";
 import { get } from "lodash";
@@ -47,6 +47,7 @@ class Login extends React.Component {
   messageError() {
     if(!this.props.loginState.loading && this.props.loginState.error != null) {
       this.notify(this.props.loginState.error);
+      this.props.clearErrorLogin();
     }
   }
 
@@ -81,16 +82,10 @@ class Login extends React.Component {
           <Col md={4} xs={12}>
             <Card className="card-user">
               <form onSubmit={this.handleSubmit.bind(this)}>
-                <div className="image">
-                  <img src={imagenHeaderLogin} alt="..." />
+                <div className="image header-login">
+                  <img className="header-login-img" src={imagenHeaderLogin} alt="..." />
                 </div>
                 <CardBody>
-                  <CardAuthor
-                    avatar={mike}
-                    avatarAlt="..."
-                    title="Welcome"
-                    description="Look & Pay"
-                  />
                   
                     <FormInputs
                         ncols={["col-md-12"]}
@@ -174,6 +169,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onLogin: ({email, password}) => {
       dispatch(loginAction({email, password}));
+    },
+    clearErrorLogin: () => {
+      dispatch(clearErrorLoginAction());
     }
   };
 };
