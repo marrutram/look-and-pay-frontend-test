@@ -85,6 +85,7 @@ class MyPurchases extends React.Component {
                             <th>Market</th>
                             <th>Bill</th>
                             <th>Total</th>
+                            <th>&nbsp;</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -97,6 +98,7 @@ class MyPurchases extends React.Component {
                                 <td className="text-capitalize">{val.supermarket}</td>
                                 <td>{val.electronicBill}</td>
                                 <td>{`${numeral(total).format('0,0')} $`}</td>
+                                <td><Button className="btn btn-success" onClick={() => this.onSelectPurchase(val)}>View more</Button></td>
                               </tr>
                             )
                           })}
@@ -111,7 +113,7 @@ class MyPurchases extends React.Component {
               {
                 view === 'purchaseDetails' &&
                 <CardFooter className="text-center">
-                  <Button onClick={this.onGoBack}>Go back!</Button>
+                  <Button className="btn btn-info" onClick={this.onGoBack}>Go back!</Button>
                 </CardFooter>
               }
             </Card>
