@@ -6,6 +6,7 @@ import ProductsList from "../../components/ProductsList";
 import moment from 'moment';
 import numeral from 'numeral';
 import { getPurchasesAction } from '../../actions/myPurchasesAction';
+import { get } from 'lodash'
 
 class MyPurchases extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class MyPurchases extends React.Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    const {myPurchasesState: { purchases: {payments} }} = props;
+    const payments = get(props.myPurchasesState, 'purchases.payments', []);
     if (payments && payments.length > 0) {
       return Object.assign({}, state, {purchases: payments});
     }
