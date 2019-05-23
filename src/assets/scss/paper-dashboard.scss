@@ -53,7 +53,7 @@
 @import "paper-dashboard/responsive";
 
 .react-html5-camera-photo>img, .react-html5-camera-photo>video {
-  width: 300px !important;
+  width: 60% !important;
 }
 
 .margen-row-login {
@@ -74,18 +74,27 @@
   font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   background: #ffc107 !important;
   color: white !important;
-  width: 150px !important;
+  width: 40%!important;
   border-radius: 15px !important;
-  left: 20% !important;
+  left: 35% !important;
+  height: 75% !important;
+}
+
+#inner-circle:hover {
+  cursor: pointer;
 }
 
 #container-circles {
-  left: 35% !important;
+  width: 100% !important;
+  left: 0 !important;
+  bottom: 50px !important;
 }
 
 #outer-circle {
-  width: 200px !important;
+  width: 100% !important;
+  left: 0% !important;
   border-radius: 15px !important;
+  background-color: transparent!important;
 }
 
 .logo-look-pay {
@@ -129,12 +138,15 @@
 #inner-circle:before {
   content: "PAY";
   font-weight: bold;
+  font-size: x-large;
 }
 
 .logo-look-register-card {
+  padding-bottom: 30px;
   #inner-circle:before {
-    content: "OK" !important;
+    content: "RECORD" !important;
     font-weight: bold;
+    font-size: x-large;
   }
 }
 
