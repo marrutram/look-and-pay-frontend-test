@@ -23,7 +23,12 @@ export function createrPay(arg) {
           supermarket: $supermarket,
           date: $date,
           hour: $hour,
-          products: $products)
+          products: $products) {
+            name
+            lastname
+            email
+            urlImagen
+          }
        }
       `,
       variables: arg
