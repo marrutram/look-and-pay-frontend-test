@@ -44,7 +44,7 @@ class ProductList extends React.Component {
               inputProps: {
                 type: "text",
                 disabled: true,
-                defaultValue: moment(date, 'YYYY-MM-DD').format('MM-DD-YYYY')
+                defaultValue: date // moment(date, 'YYYY-MM-DD').format('MM-DD-YYYY')
               }
             },
             {
@@ -52,7 +52,7 @@ class ProductList extends React.Component {
               inputProps: {
                 type: "text",
                 disabled: true,
-                defaultValue: moment(hour, 'HH:m').format('HH:m')
+                defaultValue: hour // moment(hour, 'HH:m').format('HH:m')
               }
             }
           ]}

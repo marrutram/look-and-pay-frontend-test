@@ -69,8 +69,8 @@ class MyPurchases extends React.Component {
                             {purchases.map((val, key) => {
                               return (
                                 <tr key={key} style={{cursor: 'pointer'}} onClick={() => this.onSelectPurchase(val)}>
-                                  <td>{moment(val.date, 'YYYY-MM-DD').format('MM-DD-YYYY')}</td>
-                                  <td>{moment(val.hour, 'HH:m').format('HH:m')}</td>
+                                  <td>{val.date /* moment(val.date, 'YYYY-MM-DD').format('MM-DD-YYYY') */}</td> 
+                                  <td>{val.hour /* moment(val.hour, 'HH:m').format('HH:m') */}</td>
                                   <td className="text-capitalize">{val.supermarket}</td>
                                   <td>{val.electronicBill}</td>
                                   <td>{`${numeral(val.balance).format('0,0')} $`}</td>
