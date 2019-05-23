@@ -64,7 +64,7 @@ class Home extends React.Component {
         <NotificationAlert ref="notificationAlert" />
         <Row>
           <Col md={12} xs={12}>
-            <Card className="card-user">
+            <Card className="card-user mt-3">
               <div className="image logo-home-header">"
                 <img className="logo-home" src={damirBosnjak} alt="..." />
               </div>

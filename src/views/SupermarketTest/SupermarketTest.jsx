@@ -151,7 +151,7 @@ class SupermarketTest extends React.Component {
         <NotificationAlert ref="notificationAlert" />
         <Row>
           <Col md={8} xs={12}>
-            <Card className="card-user">
+            <Card className="card-user mt-3">
               <CardBody>
                 <form>
                   <FormInputs
