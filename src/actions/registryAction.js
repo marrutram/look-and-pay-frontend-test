@@ -22,6 +22,13 @@ export const registryAction = (data) => {
   };
 };
 
+export const clearErrorRegistry = () => {
+  return dispatch => {
+    dispatch(registryFailure(null));
+    dispatch(registryFailure(null));
+  };
+};
+
 const loginSuccess = todo => ({
   type: LOGIN_SUCCESS,
   payload: todo

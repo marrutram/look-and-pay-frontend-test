@@ -4,7 +4,7 @@ import FormInputs from "../../components/FormInputs/FormInputs.jsx";
 import Button from "../../components/CustomButton/CustomButton.jsx";
 import Loader from "../../components/Loader";
 import NotificationAlert from "react-notification-alert";
-import { registryAction } from '../../actions/registryAction';
+import { registryAction, clearErrorRegistry } from '../../actions/registryAction';
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 import { Redirect } from "react-router-dom";
@@ -70,6 +70,7 @@ class Registry extends React.Component {
     };
     if(get(this.refs, 'notificationAlert')){
       this.refs.notificationAlert.notificationAlert(options);
+      this.props.onclearErrorRegistry();
     }
   }
 
@@ -276,7 +277,10 @@ const mapDispatchToProps = dispatch => {
   return {
     onRegistry: ({email, password, lastName, name, urlImagen, nameCard, numberCard, expDateCard}) => {
       dispatch(registryAction({email, password, lastName, name, urlImagen, nameCard, numberCard, expDateCard}));
-    }
+    },
+    onclearErrorRegistry: () => {
+      dispatch(clearErrorRegistry());
+    },
   };
 };
 
