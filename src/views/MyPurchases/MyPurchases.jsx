@@ -2,11 +2,10 @@ import React from "react";
 import { Card, Table, CardBody, Row, Col, CardFooter, Button } from "reactstrap";
 import NotificationAlert from "react-notification-alert";
 import { connect } from 'react-redux';
-import { thead, tbody, supermarketArray, productArray} from "../../variables/general";
 import ProductsList from "../../components/ProductsList";
-import * as moment from 'moment-timezone';
-import numeral from 'numeral'
-import { random, map, sumBy, toString } from 'lodash';
+import moment from 'moment';
+import numeral from 'numeral';
+import { getPurchasesAction } from '../../actions/myPurchasesAction';
 
 class MyPurchases extends React.Component {
   constructor(props) {
@@ -19,11 +18,17 @@ class MyPurchases extends React.Component {
     this.onSelectPurchase = this.onSelectPurchase.bind(this);
     this.onGoBack = this.onGoBack.bind(this);
   }
-  
-  onDismiss() {}
 
+  static getDerivedStateFromProps(props, state) {
+    const {myPurchasesState: { purchases: {payments} }} = props;
+    if (payments && payments.length > 0) {
+      return Object.assign({}, state, {purchases: payments});
+    }
+    return state
+  }
+  
   componentDidMount() {
-    this.randomData();
+    this.props.onLoad();
   }
 
   onSelectPurchase = (purchase) => {
@@ -32,35 +37,6 @@ class MyPurchases extends React.Component {
 
   onGoBack = () => {
     this.setState({view: 'purchaseList', purchase: null});
-  }
-  
-  async randomData() {
-    const purchasesCount = random(10, false);
-    let purchases = [];
-    for(let i=0; i<=purchasesCount; i++) {
-      const supermarketIndex = random(1, supermarketArray.length - 1);
-      const supermarket = supermarketArray[supermarketIndex];
-      const electronicBill = toString(random(999, 10000) + 99999999);
-      const date =  moment().tz("America/Santiago").format("MM-DD-YYYY"); 
-      const hour =  moment().tz("America/Santiago").format("HH:mm");
-      const products = []; 
-      let index = random(0, 4);
-      for (let i = 0; i < 3; i++) {
-        const product = productArray[index];
-        product.count = random(1, 10);
-        product.total = product.count * product.unit;
-        products.push(product);
-        index++;
-        tbody.push({
-          className: "table-success",
-          data: map(product)
-        });
-      }
-      purchases.push({supermarket, electronicBill, date, hour, products});
-    }
-    await this.setState({
-      purchases
-    });
   }
 
   render() {
@@ -76,34 +52,37 @@ class MyPurchases extends React.Component {
                   view === 'purchaseList' ?
                   <form>
                   {
-                      purchases && purchases.length > 0 && 
-                      <Table responsive>
-                        <thead className="text-primary">
-                          <tr>
-                            <th>Date</th>
-                            <th>Hour</th>
-                            <th>Market</th>
-                            <th>Bill</th>
-                            <th>Total</th>
-                            <th>&nbsp;</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {purchases.map((val, key) => {
-                            const total = sumBy(val.products, 'total');
-                            return (
-                              <tr key={key} style={{cursor: 'pointer'}} onClick={() => this.onSelectPurchase(val)}>
-                                <td>{val.date}</td>
-                                <td>{val.hour}</td>
-                                <td className="text-capitalize">{val.supermarket}</td>
-                                <td>{val.electronicBill}</td>
-                                <td>{`${numeral(total).format('0,0')} $`}</td>
-                                <td><Button className="btn btn-success" onClick={() => this.onSelectPurchase(val)}>View more</Button></td>
-                              </tr>
-                            )
-                          })}
-                        </tbody>
-                      </Table>
+                      (purchases && purchases.length > 0) ?
+                        <Table responsive>
+                          <thead className="text-primary">
+                            <tr>
+                              <th>Date</th>
+                              <th>Hour</th>
+                              <th>Market</th>
+                              <th>Bill</th>
+                              <th>Total</th>
+                              <th>&nbsp;</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {purchases.map((val, key) => {
+                              return (
+                                <tr key={key} style={{cursor: 'pointer'}} onClick={() => this.onSelectPurchase(val)}>
+                                  <td>{moment(val.date, 'YYYY-MM-DD').format('MM-DD-YYYY')}</td>
+                                  <td>{moment(val.hour, 'HH:m').format('HH:m')}</td>
+                                  <td className="text-capitalize">{val.supermarket}</td>
+                                  <td>{val.electronicBill}</td>
+                                  <td>{`${numeral(val.balance).format('0,0')} $`}</td>
+                                  <td className="text-center"><Button className="btn btn-success" onClick={() => this.onSelectPurchase(val)}>View more</Button></td>
+                                </tr>
+                              )
+                            })}
+                          </tbody>
+                        </Table>
+                      :
+                        <div className="d-flex align-items-center justify-content-center" style={{minHeight: '240px'}}>
+                          <h4 className="mt-0">You don't have any purchases...</h4>
+                        </div>
                     }
                   </form>
                   :
@@ -128,4 +107,12 @@ const mapStateToProps = (state) => ({
   ...state
 });
 
-export default connect(mapStateToProps)(MyPurchases);
+const mapDispatchToProps = dispatch => {
+  return {
+    onLoad: () => {
+      dispatch(getPurchasesAction());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyPurchases);

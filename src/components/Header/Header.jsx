@@ -1,21 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
   Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
-  Nav,
-  NavItem,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Container,
-  InputGroup,
-  InputGroupText,
-  InputGroupAddon,
-  Input
+  Container
 } from "reactstrap";
 
 import dashboardRoutes from "../../routes/dashboard.jsx";
@@ -30,7 +19,6 @@ class Header extends React.Component {
       login: this.props.loginState.login
     };
 
-    console.log("state::", this.state );
     this.toggle = this.toggle.bind(this);
     this.dropdownToggle = this.dropdownToggle.bind(this);
   }

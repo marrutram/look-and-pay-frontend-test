@@ -4,6 +4,8 @@ import { Table } from "reactstrap";
 import FormInputs from "../FormInputs/FormInputs.jsx";
 import { thead } from "../../variables/general";
 import PropTypes from "prop-types";
+import moment from 'moment';
+import numeral from 'numeral'
 
 class ProductList extends React.Component {
   render() {
@@ -41,7 +43,7 @@ class ProductList extends React.Component {
               inputProps: {
                 type: "text",
                 disabled: true,
-                defaultValue: date
+                defaultValue: moment(date, 'YYYY-MM-DD').format('MM-DD-YYYY')
               }
             },
             {
@@ -49,7 +51,7 @@ class ProductList extends React.Component {
               inputProps: {
                 type: "text",
                 disabled: true,
-                defaultValue: hour
+                defaultValue: moment(hour, 'HH:m').format('HH:m')
               }
             }
           ]}
@@ -82,10 +84,10 @@ class ProductList extends React.Component {
                     {prop.count}
                   </td>
                   <td className="text-left">
-                    {prop.unit}
+                    {`${numeral(prop.unit).format('0,0')} $`}
                   </td>
                   <td className="text-left">
-                    {prop.total}
+                    {`${numeral(prop.balance).format('0,0')} $`}
                   </td>
                 </tr>
               );
