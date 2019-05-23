@@ -72,8 +72,20 @@
 #inner-circle {
   padding-top: 12px;
   font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
-  background: rgb(0, 113, 206)!important;
+  background: #ffc107 !important;
   color: white !important;
+  width: 150px !important;
+  border-radius: 15px !important;
+  left: 20% !important;
+}
+
+#container-circles {
+  left: 35% !important;
+}
+
+#outer-circle {
+  width: 200px !important;
+  border-radius: 15px !important;
 }
 
 .logo-look-pay {
