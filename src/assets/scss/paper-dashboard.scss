@@ -125,3 +125,12 @@
     font-weight: bold;
   }
 }
+
+.avatar {
+  width: 35px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 50%;
+  padding: 0px;
+  display: inline-flex;
+}

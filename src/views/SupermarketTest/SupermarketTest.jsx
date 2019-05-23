@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import { Card, Table, CardBody, CardFooter, Row, Col } from "reactstrap";
 import FormInputs from "../../components/FormInputs/FormInputs.jsx";
 import supermarketPhoto from "../../assets/img/logo.svg";
@@ -9,7 +9,8 @@ import { connect } from 'react-redux';
 import { thead, tbody, supermarketArray, productArray} from "../../variables/general";
 import * as moment from 'moment-timezone';
 import { random, map, get } from 'lodash';
-import { createPayAction , clearErrorPayAction} from '../../actions/createPayAction';
+import { createPayAction , clearPayAction} from '../../actions/createPayAction';
+import Loader from "../../components/Loader";
 
 class SupermarketTest extends React.Component {
   constructor(props) {
@@ -85,22 +86,22 @@ class SupermarketTest extends React.Component {
     let balance = 0;
     for (let i = 0; i < 3; i++) {
       const product = productArray[index];
-      product.count = String(random(1, 100));
-      product.total = String(product.count * product.unit);
+      product.count = random(1, 100);
+      product.balance = String(product.count * product.unit);
       products.push(product);
       index++;
       tbody.push({
         className: "table-success",
         data: map(product)
       });
-      balance =+ product.total;
+      balance =+ product.balance;
     }
     await this.setState({
       supermarket: supermarket,
-      electronicBill: electronicBill,
+      electronicBill: String(electronicBill),
       date: date,
       hour: hour,
-      balance: balance,
+      balance: String(balance),
       products: products
     });
   }
@@ -122,7 +123,7 @@ class SupermarketTest extends React.Component {
       };
       if(get(this.refs, 'notificationAlert')){
         this.refs.notificationAlert.notificationAlert(options);
-        this.props.clearErrorPay();
+        this.props.clearPay();
       }
     } 
     if(!this.props.createPayState.loading && this.props.createPayState.pay != null) {
@@ -141,6 +142,7 @@ class SupermarketTest extends React.Component {
       };
       if(get(this.refs, 'notificationAlert')){
         this.refs.notificationAlert.notificationAlert(options);
+        this.props.clearPay();
       }
     }
   }
@@ -164,120 +166,113 @@ class SupermarketTest extends React.Component {
                           disabled: true,
                           defaultValue: this.state.supermarket
                         }
-                      },
-                      {
-                        label: "Electronic bill",
-                        inputProps: {
-                          type: "text",
-                          disabled: true,
-                          defaultValue: this.state.electronicBill
+                      ]}
+                    />
+                    
+                    <FormInputs
+                      ncols={["col-md-6 col-xs-12", "col-md-6 col-xs-12"]}
+                      proprieties={[
+                        {
+                          label: "Date",
+                          inputProps: {
+                            type: "text",
+                            disabled: true,
+                            defaultValue: this.state.date
+                          }
+                        },
+                        {
+                          label: "Hour",
+                          inputProps: {
+                            type: "text",
+                            disabled: true,
+                            defaultValue: this.state.hour
+                          }
                         }
-                      }
-                    ]}
-                  />
-                  
-                   <FormInputs
-                    ncols={["col-md-6 col-xs-12", "col-md-6 col-xs-12"]}
-                    proprieties={[
-                      {
-                        label: "Date",
-                        inputProps: {
-                          type: "text",
-                          disabled: true,
-                          defaultValue: this.state.date
-                        }
-                      },
-                      {
-                        label: "Hour",
-                        inputProps: {
-                          type: "text",
-                          disabled: true,
-                          defaultValue: this.state.hour
-                        }
-                      }
-                    ]}
-                  />
-                  <Table responsive>
-                    <thead className="text-primary">
-                      <tr>
-                        {thead.map((prop, key) => {
-                          if (key === thead.length - 1)
-                            return (
-                              <th key={key} className="text-right">
-                                {prop}
-                              </th>
-                            );
-                          return <th key={key}>{prop}</th>;
+                      ]}
+                    />
+                    <Table responsive>
+                      <thead className="text-primary">
+                        <tr>
+                          {thead.map((prop, key) => {
+                            if (key === thead.length - 1)
+                              return (
+                                <th key={key} className="text-right">
+                                  {prop}
+                                </th>
+                              );
+                            return <th key={key}>{prop}</th>;
+                          })}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {tbody.map((prop, key) => {
+                          return (
+                            <tr key={key}>
+                              {prop.data.map((prop, key) => {
+                                if (key === 0)
+                                  return (
+                                    <td key={key}>
+                                      <img src={prop} alt="" className="img-circle img-no-padding img-responsive img-product" />
+                                    </td>
+                                  );
+                                if (key === thead.length - 1)
+                                  return (
+                                    <td key={key} className="text-right">
+                                      {prop}
+                                    </td>
+                                  );
+                                return <td key={key}>{prop}</td>;
+                              })}
+                            </tr>
+                          );
                         })}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {tbody.map((prop, key) => {
-                        return (
-                          <tr key={key}>
-                            {prop.data.map((prop, key) => {
-                              if (key === 0)
-                                return (
-                                  <td key={key}>
-                                    <img src={prop} alt="" className="img-circle img-no-padding img-responsive img-product" />
-                                  </td>
-                                );
-                              if (key === thead.length - 1)
-                                return (
-                                  <td key={key} className="text-right">
-                                    {prop}
-                                  </td>
-                                );
-                              return <td key={key}>{prop}</td>;
-                            })}
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </Table>
-                </form>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col md={4} xs={12}>
-            <Card className="card-user card-pay">
-              <div className="image">
-                <img className="logo-look-pay " src={supermarketPhoto} alt="..." />
-              </div>
-              <CardBody>
-                
-                <Camera
-                  onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
-                  onCameraError = { (error) => { this.onCameraError(error); } }
-                  idealFacingMode = {FACING_MODES.USER}
-                  idealResolution = {{width: 640, height: 480}}
-                  imageType = {IMAGE_TYPES.JPG}
-                  imageCompression = {0.97}
-                  isMaxResolution = {false}
-                  isImageMirror = {false}
-                  isSilentMode = {true}
-                  isDisplayStartCameraError = {true}
-                  isFullscreen = {false}
-                  sizeFactor = {1}
-                  onCameraStart = { (stream) => { this.onCameraStart(stream); } }
-                  onCameraStop = { () => { this.onCameraStop(); } }
-                />
-              </CardBody>
-              <CardFooter>
-                <hr />
-                <div className="button-container">
-                  <Row>
-                    <Col xs={12} sm={12} md={12} lg={12} className="mr-auto ml-auto">
-                      <h5>
-                        Smile in photo
-                      </h5>
-                    </Col>
-                  </Row>
+                      </tbody>
+                    </Table>
+                  </form>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col md={4} xs={12}>
+              <Card className="card-user card-pay">
+                <div className="image">
+                  <img className="logo-look-pay " src={supermarketPhoto} alt="..." />
                 </div>
-              </CardFooter>
-            </Card>
-          </Col>
-        </Row>
+                <CardBody>
+                  
+                  <Camera
+                    onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
+                    onCameraError = { (error) => { this.onCameraError(error); } }
+                    idealFacingMode = {FACING_MODES.USER}
+                    idealResolution = {{width: 640, height: 480}}
+                    imageType = {IMAGE_TYPES.JPG}
+                    imageCompression = {0.97}
+                    isMaxResolution = {false}
+                    isImageMirror = {false}
+                    isSilentMode = {true}
+                    isDisplayStartCameraError = {true}
+                    isFullscreen = {false}
+                    sizeFactor = {1}
+                    onCameraStart = { (stream) => { this.onCameraStart(stream); } }
+                    onCameraStop = { () => { this.onCameraStop(); } }
+                  />
+                </CardBody>
+                <CardFooter>
+                  <hr />
+                  <div className="button-container">
+                    <Row>
+                      <Col xs={12} sm={12} md={12} lg={12} className="mr-auto ml-auto">
+                        <h5>
+                          Smile in photo
+                        </h5>
+                      </Col>
+                    </Row>
+                  </div>
+                </CardFooter>
+              </Card>
+            </Col>
+          </Row>
+        </Fragment>
+      } 
       </div>
     );
   }
@@ -292,8 +287,8 @@ const mapDispatchToProps = dispatch => {
     onPay: ({supermarket, electronicBill, date, hour, balance, products, userImage}) => {
       dispatch(createPayAction({supermarket, electronicBill, date, hour, balance, products, userImage}));
     },
-    clearErrorPay: () => {
-      dispatch(clearErrorPayAction());
+    clearPay: () => {
+      dispatch(clearPayAction());
     }
   };
 };

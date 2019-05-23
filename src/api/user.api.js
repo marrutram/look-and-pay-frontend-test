@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export function signup(arg) {
+  console.log("arg::", arg);
   return axios({
     url: 'http://localhost:4000/graphql',
     method: 'post',
@@ -15,9 +16,10 @@ export function signup(arg) {
             urlImagen: "${arg.urlImagen}"
           ){
             name
-            lastnanme
+            lastname
             email
             token
+            urlImagen
           }
         }
       `
@@ -37,9 +39,10 @@ export function login(arg) {
             password: "${arg.password}"
           ){
             name
-            lastnanme
+            lastname
             email
             token
+            urlImagen
           }
         }
       `

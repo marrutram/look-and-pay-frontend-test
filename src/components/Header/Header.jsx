@@ -6,7 +6,7 @@ import {
   NavbarBrand,
   Container
 } from "reactstrap";
-
+import { get } from "lodash";
 import dashboardRoutes from "../../routes/dashboard.jsx";
 
 class Header extends React.Component {
@@ -139,8 +139,11 @@ class Header extends React.Component {
             className="justify-content-end"
           >
            <div className="badge-colors text-right">
-            <i className="nc-icon nc-single-02 mr-2" />
-            {this.state.login.name} {this.state.login.lastname} 
+           <div className="avatar">
+            <img src={get(this.state.login, 'urlImagen')} alt="user" className="img-circle img-no-padding img-responsive" />
+          </div>
+            
+            {get(this.state.login, 'name')} {get(this.state.login, 'lastname')} 
            </div>
           </Collapse>
         </Container>

@@ -20,9 +20,10 @@ export const createPayAction = (data) => {
   };
 };
 
-export const clearErrorPayAction = () => {
+export const clearPayAction = () => {
   return dispatch => {
     dispatch(createPayFailure(null));
+    dispatch(createPaySuccess(null));
   };
 };
 
