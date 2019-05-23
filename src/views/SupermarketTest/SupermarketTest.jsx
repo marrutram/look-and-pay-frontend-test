@@ -11,7 +11,7 @@ import * as moment from 'moment-timezone';
 import { random, map, get } from 'lodash';
 import { createPayAction , clearPayAction} from '../../actions/createPayAction';
 import Loader from "../../components/Loader";
-
+import numeral from 'numeral';
 import successImg from "../../assets/img/success.png";
 import errorImg from "../../assets/img/error.png";
 
@@ -165,6 +165,47 @@ class SupermarketTest extends React.Component {
           {
             (this.props.createPayState.error === null && this.props.createPayState.pay === null) &&
             <Row>
+              <Col md={4} xs={12}>
+                <Card className="card-user card-pay">
+                  <div className="image">
+                    <img className="logo-look-pay " src={supermarketPhoto} alt="..." />
+                  </div>
+                  <CardBody>
+                    
+                    <Camera
+                      onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
+                      onCameraError = { (error) => { this.onCameraError(error); } }
+                      idealFacingMode = {FACING_MODES.USER}
+                      idealResolution = {{width: 640, height: 480}}
+                      imageType = {IMAGE_TYPES.JPG}
+                      imageCompression = {0.97}
+                      isMaxResolution = {false}
+                      isImageMirror = {false}
+                      isSilentMode = {true}
+                      isDisplayStartCameraError = {true}
+                      isFullscreen = {false}
+                      sizeFactor = {1}
+                      onCameraStart = { (stream) => { this.onCameraStart(stream); } }
+                      onCameraStop = { () => { this.onCameraStop(); } }
+                    />
+                  </CardBody>
+                  <CardFooter>
+                    <hr />
+                    <div className="button-container">
+                      <Row>
+                        <Col xs={12} sm={12} md={12} lg={12} className="mr-auto ml-auto">
+                          <div className="total">
+                            TOTAL 
+                          </div>
+                          <div className="balance">
+                             {`${numeral(this.state.balance).format('0,0')} $`}
+                          </div>
+                        </Col>
+                      </Row>
+                    </div>
+                  </CardFooter>
+                </Card>
+              </Col>
               <Col md={8} xs={12}>
                 <Card className="card-user mt-3">
                   <CardBody>
@@ -252,44 +293,6 @@ class SupermarketTest extends React.Component {
                       </Table>
                     </form>
                   </CardBody>
-                </Card>
-              </Col>
-              <Col md={4} xs={12}>
-                <Card className="card-user card-pay">
-                  <div className="image">
-                    <img className="logo-look-pay " src={supermarketPhoto} alt="..." />
-                  </div>
-                  <CardBody>
-                    
-                    <Camera
-                      onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
-                      onCameraError = { (error) => { this.onCameraError(error); } }
-                      idealFacingMode = {FACING_MODES.USER}
-                      idealResolution = {{width: 640, height: 480}}
-                      imageType = {IMAGE_TYPES.JPG}
-                      imageCompression = {0.97}
-                      isMaxResolution = {false}
-                      isImageMirror = {false}
-                      isSilentMode = {true}
-                      isDisplayStartCameraError = {true}
-                      isFullscreen = {false}
-                      sizeFactor = {1}
-                      onCameraStart = { (stream) => { this.onCameraStart(stream); } }
-                      onCameraStop = { () => { this.onCameraStop(); } }
-                    />
-                  </CardBody>
-                  <CardFooter>
-                    <hr />
-                    <div className="button-container">
-                      <Row>
-                        <Col xs={12} sm={12} md={12} lg={12} className="mr-auto ml-auto">
-                          <h5>
-                            Smile in photo
-                          </h5>
-                        </Col>
-                      </Row>
-                    </div>
-                  </CardFooter>
                 </Card>
               </Col>
             </Row>
