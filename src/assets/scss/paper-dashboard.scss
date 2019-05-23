@@ -54,7 +54,6 @@
 
 .react-html5-camera-photo>img, .react-html5-camera-photo>video {
   width: 60% !important;
-  height: 300px;
 }
 
 .margen-row-login {
@@ -178,8 +177,9 @@
   color: rgb(0, 113, 206);
 }
 
-.card-pay {
+.card-public {
   .react-html5-camera-photo > img, .react-html5-camera-photo > video {
+    height: 530px !important;
     width: 100% !important;
   }
-}
+ }
