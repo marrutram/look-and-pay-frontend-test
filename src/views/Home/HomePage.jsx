@@ -69,11 +69,9 @@ class Home extends React.Component {
                 <img className="logo-home" src={damirBosnjak} alt="..." />
               </div>
               <CardBody>
-                <p className="description text-justify">
-  Our product is called Look & Pay
-At Walmart we believe that the shopping experience should be simple, fast and safe for everyone.
-Including people with different abilities or mobility problems.
-we want you not to have to worry about using cash or credit cards, but when paying you should only smile."
+                <p className="description text-center">
+                <h2 className="welcome"> Welcome! </h2>
+                Pay with just smile. Enjoy with us the best experience when paying.
                 </p>
               </CardBody>
               <CardFooter>
