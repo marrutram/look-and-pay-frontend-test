@@ -1,0 +1,1 @@
+export const URL_API = "http://api.staging-dlovtm.walmartdigital.cl/look-and-pay-backend"

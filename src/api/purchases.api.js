@@ -1,8 +1,9 @@
 import axios from 'axios';
+import {URL_API} from '../constante/urlAPI';
 
 export function getPurchases() {
   return axios({
-    url: 'http://localhost:4000/graphql',
+    url: `${URL_API}`,
     method: 'post',
     data: {
       query: `
