@@ -139,7 +139,7 @@ class Header extends React.Component {
             className="justify-content-end"
           >
            <div className="badge-colors text-right">
-            <i className="nc-icon nc-single-02" />
+            <i className="nc-icon nc-single-02 mr-2" />
             {this.state.login.name} {this.state.login.lastname} 
            </div>
           </Collapse>
