@@ -76,6 +76,7 @@ class SupermarketTest extends React.Component {
   }
   
   async randomData() {
+    tbody.splice(0,tbody.length)
     const supermarketIndex = random(1, supermarketArray.length - 1);
     const supermarket = supermarketArray[supermarketIndex];
     const electronicBill = random(999, 10000) + 99999999;
