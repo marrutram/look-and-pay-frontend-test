@@ -274,8 +274,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRegistry: ({email, password, lastName, urlImagen, nameCard, numberCard, expDateCard}) => {
-      dispatch(registryAction({email, password, lastName, urlImagen, nameCard, numberCard, expDateCard}));
+    onRegistry: ({email, password, lastName, name, urlImagen, nameCard, numberCard, expDateCard}) => {
+      dispatch(registryAction({email, password, lastName, name, urlImagen, nameCard, numberCard, expDateCard}));
     }
   };
 };

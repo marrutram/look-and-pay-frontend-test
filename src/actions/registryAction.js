@@ -8,11 +8,12 @@ export const registryAction = (data) => {
 
     signup(data)
       .then(res => {
+        console.log("res::", res);
         if(get(res, 'data.errors')) {
           dispatch(registryFailure(get(res, 'data.errors[0].message')));
         } else {
-          dispatch(registrySuccess(get (res, 'data.data.registry')));
-          dispatch(loginSuccess(get (res, 'data.data.registry')));
+          dispatch(registrySuccess(get (res, 'data.data.signup')));
+          dispatch(loginSuccess(get (res, 'data.data.signup')));
         }
       })
       .catch(err => {

@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 export function createrPay(arg) {
   console.log("arg::", arg);
   return axios({
@@ -8,18 +7,26 @@ export function createrPay(arg) {
     method: 'post',
     data: {
       query: `
-        mutation(){
-          createPayment(
-            supermarket: "${arg.supermarket}",
-            electronicBill: "${arg.electronicBill}",
-            date: "${arg.date}",
-            hour: "${arg.hour}",
-            balance: "${arg.balance}",
-            products: ${JSON.stringify(arg.products)},
-            userImage: "${arg.userImage}",
-            )
-        }
-      `
+      mutation(
+        $balance: String!,
+        $electronicBill: String!,
+        $supermarket: String!,
+        $date: String,
+        $userImage: String!,
+        $hour: String,
+        $products: [ProductInput], ){
+       
+        createPayment(
+          balance: $balance,
+          userImage: $userImage,
+          electronicBill: $electronicBill,
+          supermarket: $supermarket,
+          date: $date,
+          hour: $hour,
+          products: $products)
+       }
+      `,
+      variables: arg
     }
   });
 }

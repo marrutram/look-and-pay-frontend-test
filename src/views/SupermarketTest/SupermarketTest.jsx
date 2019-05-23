@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { thead, tbody, supermarketArray, productArray} from "../../variables/general";
 import * as moment from 'moment-timezone';
 import { random, map, get } from 'lodash';
-import { createPayAction , clearErrorPayAction} from '../../actions/createPayAction';
+import { createPayAction , clearPayAction} from '../../actions/createPayAction';
 
 class SupermarketTest extends React.Component {
   constructor(props) {
@@ -85,22 +85,22 @@ class SupermarketTest extends React.Component {
     let balance = 0;
     for (let i = 0; i < 3; i++) {
       const product = productArray[index];
-      product.count = String(random(1, 100));
-      product.total = String(product.count * product.unit);
+      product.count = random(1, 100);
+      product.balance = String(product.count * product.unit);
       products.push(product);
       index++;
       tbody.push({
         className: "table-success",
         data: map(product)
       });
-      balance =+ product.total;
+      balance =+ product.balance;
     }
     await this.setState({
       supermarket: supermarket,
-      electronicBill: electronicBill,
+      electronicBill: String(electronicBill),
       date: date,
       hour: hour,
-      balance: balance,
+      balance: String(balance),
       products: products
     });
   }
@@ -122,7 +122,7 @@ class SupermarketTest extends React.Component {
       };
       if(get(this.refs, 'notificationAlert')){
         this.refs.notificationAlert.notificationAlert(options);
-        this.props.clearErrorPay();
+        this.props.clearPay();
       }
     } 
     if(!this.props.createPayState.loading && this.props.createPayState.pay != null) {
@@ -141,6 +141,7 @@ class SupermarketTest extends React.Component {
       };
       if(get(this.refs, 'notificationAlert')){
         this.refs.notificationAlert.notificationAlert(options);
+        this.props.clearPay();
       }
     }
   }
@@ -292,8 +293,8 @@ const mapDispatchToProps = dispatch => {
     onPay: ({supermarket, electronicBill, date, hour, balance, products, userImage}) => {
       dispatch(createPayAction({supermarket, electronicBill, date, hour, balance, products, userImage}));
     },
-    clearErrorPay: () => {
-      dispatch(clearErrorPayAction());
+    clearPay: () => {
+      dispatch(clearPayAction());
     }
   };
 };
