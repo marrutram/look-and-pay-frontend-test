@@ -5,8 +5,9 @@ import FormInputs from "../FormInputs/FormInputs.jsx";
 import { thead } from "../../variables/general";
 import PropTypes from "prop-types";
 import moment from 'moment';
-import numeral from 'numeral'
+import numeral from 'numeral';
 
+import noImage from '../../assets/img/no_image.png';
 class ProductList extends React.Component {
   render() {
     const { products, supermarket, electronicBill, date, hour } = this.props;
@@ -75,7 +76,7 @@ class ProductList extends React.Component {
               return (
                 <tr key={key}>
                   <td>
-                    <img src={prop.imagenUrl} alt="" className="img-circle img-no-padding img-responsive img-product" />
+                    <img src={prop.imagenUrl || noImage} alt="" className="img-circle img-no-padding img-responsive img-product mw-100" />
                   </td>
                   <td className="text-left">
                     {prop.description}
