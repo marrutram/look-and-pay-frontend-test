@@ -141,6 +141,7 @@ class SupermarketTest extends React.Component {
       };
       if(get(this.refs, 'notificationAlert')){
         this.refs.notificationAlert.notificationAlert(options);
+        this.randomData();
       }
     }
   }
