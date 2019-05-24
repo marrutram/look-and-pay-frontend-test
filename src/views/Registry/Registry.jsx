@@ -233,11 +233,11 @@ class Registry extends React.Component {
                                     }
                                   },
                                   {
-                                    label: "Expirate Date",
+                                    label: "Expiration Date",
                                     inputProps: {
                                       type: "number",
                                       name: "expDateCard",
-                                      placeholder: "Expirate Date",
+                                      placeholder: "Expiration Date",
                                       required:true,
                                       defaultValue: this.state.expDateCard
                                     }
