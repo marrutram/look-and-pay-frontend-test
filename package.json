@@ -5,7 +5,7 @@
   "homepage": "https://xxxx",
   "dependencies": {
     "@types/react": "16.4.16",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "chart.js": "2.7.2",
     "history": "4.7.2",
